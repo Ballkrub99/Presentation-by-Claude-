@@ -922,5 +922,130 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+<script>
+// ฟังก์ชันสำหรับการกะพริบตัวเลข และเปลี่ยนเนื้อหาด้านขวา
+document.addEventListener('DOMContentLoaded', function() {
+    // หาอีลิเมนต์ที่ต้องการที่จะทำการเปลี่ยนแปลง
+    const countElements = [
+        document.getElementById('count-1'),
+        document.getElementById('count-2'),
+        document.getElementById('count-3'),
+        document.getElementById('count-4'),
+        document.getElementById('count-5')
+    ];
+    
+    // ส่วนของวิธีการปฏิบัติ
+    const listenCircle = document.getElementById('listen-circle');
+    const pauseCircle = document.getElementById('pause-circle');
+    const respondCircle = document.getElementById('respond-circle');
+    
+    // ส่วนของผลลัพธ์ที่พิสูจน์ได้ (stat boxes)
+    const statBoxes = document.querySelectorAll('.stat-box');
+    
+    // ทำให้ทุกตัวเลขและวงกลมเริ่มต้นด้วยความโปร่งใสต่ำ
+    function resetElements() {
+        countElements.forEach(el => {
+            if (el) el.style.opacity = '0.5';
+        });
+        
+        if (listenCircle) listenCircle.style.transform = 'scale(1)';
+        if (pauseCircle) pauseCircle.style.transform = 'scale(1)';
+        if (respondCircle) respondCircle.style.transform = 'scale(1)';
+        
+        statBoxes.forEach(box => {
+            if (box) box.style.transform = 'scale(1)';
+            if (box) box.style.opacity = '0.7';
+        });
+    }
+    
+    // ฟังก์ชันสำหรับการเริ่มการกะพริบ
+    function startAnimation() {
+        // ตรวจสอบว่าอยู่ที่สไลด์ที่ 5 หรือไม่
+        if (!document.getElementById('slide-5').classList.contains('active')) {
+            // ถ้าไม่ได้อยู่ที่สไลด์ 5 ให้ตรวจสอบอีกครั้งหลังจาก 1 วินาที
+            setTimeout(startAnimation, 1000);
+            return;
+        }
+        
+        resetElements();
+        let currentIndex = 0;
+        
+        // ฟังก์ชันสำหรับไฮไลท์ทีละตัว
+        function highlightNext() {
+            if (currentIndex < countElements.length) {
+                // รีเซ็ตทุกตัวเลขให้จาง
+                resetElements();
+                
+                // ไฮไลท์ตัวเลขปัจจุบัน
+                if (countElements[currentIndex]) {
+                    countElements[currentIndex].style.opacity = '1';
+                    countElements[currentIndex].style.transform = 'scale(1.2)';
+                }
+                
+                // ไฮไลท์ส่วนของวิธีการปฏิบัติตามลำดับ
+                if (currentIndex < 2) {
+                    // ถ้าเป็นวินาทีที่ 1-2 ไฮไลท์การรับฟัง
+                    if (listenCircle) {
+                        listenCircle.style.transform = 'scale(1.3)';
+                        listenCircle.style.boxShadow = '0 0 10px rgba(76, 201, 240, 0.8)';
+                    }
+                } else if (currentIndex < 4) {
+                    // ถ้าเป็นวินาทีที่ 3-4 ไฮไลท์การหยุด
+                    if (pauseCircle) {
+                        pauseCircle.style.transform = 'scale(1.3)';
+                        pauseCircle.style.boxShadow = '0 0 10px rgba(249, 200, 14, 0.8)';
+                    }
+                } else {
+                    // ถ้าเป็นวินาทีที่ 5 ไฮไลท์การตอบ
+                    if (respondCircle) {
+                        respondCircle.style.transform = 'scale(1.3)';
+                        respondCircle.style.boxShadow = '0 0 10px rgba(42, 157, 143, 0.8)';
+                    }
+                }
+                
+                // ไฮไลท์ stat box ทีละอัน
+                if (currentIndex < statBoxes.length && statBoxes[currentIndex]) {
+                    statBoxes[currentIndex].style.transform = 'scale(1.1)';
+                    statBoxes[currentIndex].style.opacity = '1';
+                }
+                
+                currentIndex++;
+                setTimeout(highlightNext, 1000); // เปลี่ยนทุก 1 วินาที
+            } else {
+                // จบครบรอบ รอ 5 วินาทีแล้วเริ่มใหม่
+                setTimeout(() => {
+                    currentIndex = 0;
+                    startAnimation();
+                }, 5000);
+            }
+        }
+        
+        // เริ่มไฮไลท์
+        highlightNext();
+    }
+    
+    // เริ่มการกะพริบเมื่อเปิดหน้าเว็บ
+    startAnimation();
+    
+    // เพิ่มการตรวจสอบการเปลี่ยนสไลด์
+    const slides = document.querySelectorAll('.slide-container');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    
+    if (prevBtn) prevBtn.addEventListener('click', function() {
+        setTimeout(startAnimation, 300);
+    });
+    
+    if (nextBtn) nextBtn.addEventListener('click', function() {
+        setTimeout(startAnimation, 300);
+    });
+    
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+            setTimeout(startAnimation, 300);
+        }
+    });
+});
+</script>
 </body>
 </html>
