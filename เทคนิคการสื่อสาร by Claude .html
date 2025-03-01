@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>เทคนิคการสื่อสารที่มีประสิทธิภาพ</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+:root{--primary-bg:#1a1a3a;--text:#fff;--accent:#ffd700;--red:#e63946;--green:#2a9d8f;--blue:#4cc9f0;--pink:#f72585;--card-bg:#1e2a57}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Kanit',sans-serif}
+body{background:#121212;color:var(--text);line-height:1.6;overflow:hidden;margin:0;padding:0;font-size:16px}
+.slides-wrapper{position:relative;width:100vw;height:100vh;overflow:hidden}
+.slide-container{width:100%;height:100vh;margin:0;padding:20px;background-color:var(--primary-bg);position:absolute;top:0;left:0;right:0;bottom:0;display:none;overflow-x:hidden;overflow-y:auto}
+.slide-container.active{display:flex;flex-direction:column;justify-content:center;align-items:center}
+#slide-1{background:linear-gradient(135deg,#1a1c3b,#252a59);display:flex;justify-content:center;align-items:center}
+#slide-1 .slide-header{font-size:5rem;color:var(--text);text-shadow:2px 2px 8px rgba(0,0,0,.8);background-color:rgba(0,0,0,.5);padding:20px 40px;border-radius:10px;text-align:center;animation:fadeInUp 1s ease-out}
+#slide-2{padding:40px;background-color:var(--primary-bg)}
+#slide-2 .slide-header{text-align:center;margin-bottom:30px;width:100%}
+#slide-2 .percentage{font-size:6rem;color:var(--accent);font-weight:700;display:inline-block;vertical-align:middle;animation:pulse 2s infinite}
+#slide-2 .header-text{font-size:3rem;vertical-align:middle;color:var(--text)}
+#slide-2 .subtitle{font-size:1.8rem;text-align:center;margin-bottom:30px}
+#slide-2 .subtitle .highlight{color:#ff4d4d;font-weight:700}
+.boxes-container{display:flex;justify-content:space-between;width:100%;margin-bottom:30px;flex-wrap:wrap}
+.box{width:48%;padding:20px;border-radius:10px;display:flex;flex-direction:column;margin-bottom:15px;animation:fadeIn .8s ease-out}
+.box.red-box{border:3px solid var(--red);background-color:rgba(230,57,70,.1)}
+.box.green-box{border:3px solid var(--green);background-color:rgba(42,157,143,.1)}
+.box-header{display:flex;align-items:center;margin-bottom:20px;flex-wrap:wrap}
+.box-icon{font-size:3.5rem;margin-right:20px;color:#fff}
+.box-title{font-size:2.2rem;font-weight:700}
+.red-box .box-title{color:var(--red)}
+.green-box .box-title{color:var(--green)}
+.divider{width:100%;height:2px;margin:10px 0 20px}
+.red-box .divider{background-color:var(--red)}
+.green-box .divider{background-color:var(--green)}
+.impact-item{display:flex;align-items:center;margin-bottom:15px}
+.impact-icon{width:36px;height:36px;margin-right:15px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:1.2rem}
+.red-box .impact-icon{background-color:rgba(230,57,70,.3)}
+.green-box .impact-icon{background-color:rgba(42,157,143,.3)}
+.impact-item p{font-size:1.3rem}
+.bottom-message{display:flex;align-items:center;justify-content:center;margin-top:20px;margin-bottom:20px;flex-wrap:wrap;text-align:center;animation:fadeInUp 1s ease-out}
+.bottom-icon{width:64px;height:64px;margin-right:15px;background-color:rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem}
+.bottom-message p{font-size:1.4rem;text-align:center}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
+@keyframes fadeInOut{0%{opacity:.3;transform:scale(.8)}20%{opacity:1;transform:scale(1.1)}40%,100%{opacity:.3;transform:scale(.8)}}
+@keyframes fadeIn{0%{opacity:0}100%{opacity:1}}
+@keyframes fadeInUp{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes highlight{0%,40%,90%,100%{transform:scale(1);opacity:.5}10%,30%{transform:scale(1.3);opacity:1;box-shadow:0 0 10px rgba(255,255,255,.8)}}
+@keyframes highlight-pulse{0%,100%{transform:scale(1);text-shadow:0 0 5px rgba(255,20,147,.1);color:#f72585}50%{transform:scale(1.05);text-shadow:0 0 15px rgba(255,20,147,.8);color:#ff77a8}}
+.slide-header{font-size:2.5rem;color:var(--accent);text-align:center;margin-bottom:20px;text-shadow:1px 1px 3px rgba(0,0,0,.7)}
+.slide-content{display:flex;flex-wrap:wrap;justify-content:space-between;width:100%;max-height:80vh;overflow-y:auto;padding-bottom:50px}
+#slide-4 .slide-content,#slide-8 .slide-content{max-height:82vh}
+#slide-8{background-color:#1a1a3a}
+.slide-nav{position:fixed;width:100%;bottom:20px;display:flex;justify-content:center;z-index:100}
+.nav-buttons{display:flex;gap:15px}
+.nav-btn{width:50px;height:50px;border-radius:50%;background-color:rgba(0,0,0,.7);color:#fff;border:2px solid var(--accent);font-size:24px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s ease}
+.nav-btn:hover{background-color:var(--accent);color:#000}
+.slide-indicator{position:fixed;bottom:20px;right:20px;background-color:rgba(0,0,0,.7);color:#fff;padding:5px 15px;border-radius:20px;font-weight:700;z-index:100}
+.problem-icon-container{width:200px;height:200px;margin-bottom:15px;display:flex;align-items:center;justify-content:center;background-color:rgba(255,255,255,.1);border-radius:50%;font-size:4rem;margin-left:auto;margin-right:auto}
+.highlight-text{display:inline-block;color:#f72585;font-weight:700;padding:2px 8px;border-radius:4px;background:linear-gradient(135deg,rgba(247,37,133,.1),rgba(247,37,133,.2));transform-origin:left center}
+.highlight-active{animation:highlight-pulse 1.5s ease-in-out}
+.info-card{background-color:#16213e;padding:15px;border-radius:8px;margin-bottom:15px;border:1px solid #4895ef}
+.feature-box{padding:15px;background-color:#1e2a57;border-radius:8px;margin-bottom:15px;border-left:5px solid #f72585;text-align:center;transition:transform .3s ease}
+.feature-box:hover{transform:translateY(-5px)}
+.stat-box{background-color:#003566;padding:12px;border-radius:8px;text-align:center;margin-bottom:6px;height:90px;display:flex;flex-direction:column;justify-content:center;animation:fadeIn 1s ease-out}
+.stat-value{font-size:1.8rem;color:#ffd700;font-weight:700}
+.quote-box{background-color:#3a3b4a;padding:15px;border-radius:8px;margin:15px 0;border-left:5px solid #ffd700;font-style:italic}
+.step-box{display:flex;align-items:center;background-color:#29539b;padding:7px;border-radius:8px;margin-bottom:7px;position:relative}
+.step-number{width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:50%;margin-right:10px;font-size:1.2rem;font-weight:700;color:#1a1a2e}
+.step-description{font-size:.9rem;margin:5px 0 10px 40px}
+.example-box{padding:6px;border-radius:5px;font-size:.85rem;margin-bottom:5px}
+.example-bad{background-color:#780000;border:1px solid #e63946}
+.example-good{background-color:#184e77;border:1px solid #4cc9f0}
+#slide-9 .slide-conclusion-wrapper{width:80%;max-width:800px}
+#slide-9 .slide-header{padding:30px;font-size:3rem;line-height:1.4;white-space:normal;overflow-wrap:break-word;background:linear-gradient(135deg,rgba(255,215,0,.1),rgba(255,215,0,.3));border-radius:15px;border:2px solid rgba(255,215,0,.5);min-height:150px}
+.citation{font-size:0.8rem;color:#b8b8b8;font-style:italic;text-align:right;margin-top:5px}
+.source-section{background-color:rgba(0,0,0,0.3);padding:10px;border-radius:8px;margin-top:5px}
+.source-title{color:var(--accent);margin-bottom:5px;font-weight:bold;font-size:1rem}
+.source-list{list-style-type:none;padding-left:5px}
+.source-list li{margin-bottom:5px;font-size:0.85rem}
+.source-list li a{color:#4cc9f0;text-decoration:none}
+.source-list li a:hover{text-decoration:underline}
+#slide-10{background-color:#161b33}
+#slide-10 .slide-content{max-height:85vh;overflow-y:auto}
+.reference-box{width:100%;background-color:#1a1a2e;border-radius:8px;padding:15px;margin-bottom:15px;border-left:4px solid var(--accent);animation:fadeIn 0.8s ease-out}
+.reference-title{color:var(--accent);font-size:1.3rem;margin-bottom:10px;font-weight:bold}
+.reference-list{list-style-type:none;padding-left:0}
+.reference-list li{margin-bottom:12px;padding-left:20px;position:relative;font-size:0.95rem;line-height:1.4}
+.reference-list li:before{content:"•";position:absolute;left:0;color:var(--accent);font-weight:bold}
+.reference-link{color:#4cc9f0;text-decoration:none;word-break:break-all}
+.reference-link:hover{text-decoration:underline}
+@media screen and (max-width:1024px){
+body{font-size:14px}
+#slide-1 .slide-header{font-size:4rem;padding:15px 30px}
+#slide-2 .percentage{font-size:5rem}
+#slide-2 .header-text{font-size:2.5rem}
+#slide-2 .subtitle{font-size:1.5rem}
+.box-title{font-size:1.8rem}
+.impact-item p{font-size:1.1rem}
+.bottom-message p{font-size:1.2rem}
+.slide-header{font-size:2.2rem}
+.problem-icon-container{width:150px;height:150px;font-size:3rem}
+#slide-9 .slide-header{font-size:2.5rem;padding:20px}
+}
+@media screen and (max-width:768px){
+body{font-size:12px}
+.slide-container{padding:15px;overflow-y:auto}
+#slide-1 .slide-header{font-size:2.5rem;padding:10px 20px}
+#slide-2{padding:20px}
+#slide-2 .percentage{font-size:3.5rem}
+#slide-2 .header-text{font-size:1.8rem}
+#slide-2 .subtitle{font-size:1.2rem;margin-bottom:20px}
+.boxes-container{flex-direction:column}
+.box{width:100%;margin-bottom:15px;padding:15px}
+.box-header{justify-content:center}
+.box-icon{font-size:2.5rem;margin-right:10px}
+.box-title{font-size:1.5rem}
+.impact-item p{font-size:1rem}
+.bottom-message{flex-direction:column}
+.bottom-icon{width:48px;height:48px;margin-right:0;margin-bottom:10px;font-size:1.5rem}
+.bottom-message p{font-size:1rem}
+.slide-header{font-size:1.8rem;margin-bottom:15px}
+.slide-content{max-height:80vh;padding-bottom:70px}
+.problem-icon-container{width:100px;height:100px;font-size:2.5rem}
+.nav-btn{width:60px;height:60px;font-size:30px}
+.slide-indicator{bottom:15px;right:15px;font-size:1.2rem}
+#slide-9 .slide-conclusion-wrapper{width:90%!important}
+#slide-9 .slide-header{padding:15px!important;font-size:1.8rem!important;line-height:1.3!important;height:auto!important;min-height:200px}
+[style*="width: 32%"],[style*="width: 48%"],[style*="width: 60%"],[style*="width: 36%"]{width:100%!important;margin-bottom:15px}
+[style*="flex-basis: 48%"],[style*="flex-basis: 32%"]{flex-basis:100%!important;margin-bottom:10px}
+.slide-content{overflow-y:auto}
+}
+@media (hover:none) and (pointer:coarse){
+.nav-btn{width:70px;height:70px;font-size:36px}
+.slide-indicator{padding:8px 20px;font-size:1.3rem}
+.nav-buttons{gap:20px}
+}
+</style>
+</head>
+<body>
+<div class="slides-wrapper">
+<!-- Slide 1 -->
+<div class="slide-container active" id="slide-1">
+<h1 class="slide-header">คุณเป็นคนส่วนมากหรือเปล่า?</h1>
+</div>
+
+<!-- Slide 2 -->
+<div class="slide-container" id="slide-2">
+<div class="slide-header">
+<span class="percentage">86%</span>
+<span class="header-text">ของผู้นำธุรกิจระบุว่าการสื่อสารที่ไม่มีประสิทธิภาพเป็นสาเหตุหลักของความล้มเหลว</span>
+</div>
+<div class="subtitle">
+คนส่วนใหญ่สื่อสารด้วยการ <span class="highlight">'พูดใส่'</span> ซึ่งขาดการรับฟังและเข้าใจ
+</div>
+<div class="boxes-container">
+<div class="box red-box">
+<div class="box-header">
+<div class="box-icon"><i class="fas fa-bullhorn"></i></div>
+<h3 class="box-title">พูดใส่</h3>
+</div>
+<div class="divider"></div>
+<div class="impact-item">
+<div class="impact-icon">✗</div>
+<p>พูดโดยไม่สนใจว่าผู้ฟังเข้าใจหรือไม่</p>
+</div>
+<div class="impact-item">
+<div class="impact-icon">✗</div>
+<p>ลดความไว้วางใจในทีม</p>
+</div>
+<div class="impact-item">
+<div class="impact-icon">✗</div>
+<p>เกิดความขัดแย้งในทีม</p>
+</div>
+</div>
+<div class="box green-box">
+<div class="box-header">
+<div class="box-icon"><i class="fas fa-comments"></i></div>
+<h3 class="box-title">พูดด้วย</h3>
+</div>
+<div class="divider"></div>
+<div class="impact-item">
+<div class="impact-icon">✓</div>
+<p>พูดด้วยการฟัง และถามคำถาม</p>
+</div>
+<div class="impact-item">
+<div class="impact-icon">✓</div>
+<p>ตอบสนองอย่างเข้าใจ</p>
+</div>
+<div class="impact-item">
+<div class="impact-icon">✓</div>
+<p>สร้างความไว้วางใจ</p>
+</div>
+</div>
+</div>
+<div class="bottom-message">
+<div class="bottom-icon"><i class="fas fa-comments"></i></div>
+<p>เปลี่ยนจากการ 'พูดใส่' มาเป็น 'พูดด้วย' เพื่อสร้างการสื่อสารที่มีประสิทธิภาพและสร้างความเข้าใจที่แท้จริง</p>
+</div>
+<div class="citation">
+* อ้างอิงจาก: Salesforce Research (2020) - "Impact of Communication on Business Success"
+</div>
+</div>
+
+<!-- Slide 3 -->
+<div class="slide-container" id="slide-3">
+<h1 class="slide-header" style="font-size:2.8rem">ปัญหาที่ทุกคนเจอในการสื่อสาร แต่ไม่รู้ตัว</h1>
+<div class="slide-content">
+<div style="display:flex;flex-wrap:wrap;width:100%;justify-content:space-between">
+<div class="feature-box" style="width:32%">
+<div class="problem-icon-container" style="animation:pulse 2s infinite"><i class="fas fa-running" style="font-size:3.5rem"></i></div>
+<h4 style="margin-bottom:10px;font-size:1.3rem">ปัญหา 1: พูดเร็วจนผู้ฟังตามไม่ทัน</h4>
+<div style="background-color:#164a41;padding:8px;border-radius:5px;margin-top:10px;display:flex;align-items:center">
+<span style="color:#4cc9f0;margin-right:10px;font-weight:bold">✓</span>
+<p>1.พูดช้าลง</p>
+</div>
+<div style="background-color:#164a41;padding:8px;border-radius:5px;margin-top:10px;display:flex;align-items:center">
+<span style="color:#4cc9f0;margin-right:10px;font-weight:bold">✓</span>
+<p>2.เน้นข้อมูลสำคัญ</p>
+</div>
+<div style="background-color:#164a41;padding:8px;border-radius:5px;margin-top:10px;display:flex;align-items:center">
+<span style="color:#4cc9f0;margin-right:10px;font-weight:bold">✓</span>
+<p>3.ใช้ภาพประกอบ</p>
+</div>
+</div>
+<div class="feature-box" style="width:32%">
+<div class="problem-icon-container" style="animation:pulse 2s infinite 0.5s"><i class="fas fa-assistive-listening-systems" style="font-size:3.5rem"></i></div>
+<h4 style="margin-bottom:10px;font-size:1.3rem">ปัญหา 2: ฟังเพื่อตอบ ไม่ใช่ฟังเพื่อเข้าใจ</h4>
+<div class="quote-box">
+"การฟังเพื่อโต้ตอบทันที มักทำให้เกิดความขัดแย้ง และไม่เข้าใจปัญหาจริง"
+</div>
+<div style="background-color:#164a41;padding:8px;border-radius:5px;margin-top:10px;display:flex;align-items:center">
+<span style="color:#4cc9f0;margin-right:10px;font-weight:bold">✓</span>
+<p>1.ตั้งใจฟัง เพื่อเข้าใจ</p>
+</div>
+<div style="background-color:#164a41;padding:8px;border-radius:5px;margin-top:10px;display:flex;align-items:center">
+<span style="color:#4cc9f0;margin-right:10px;font-weight:bold">✓</span>
+<p>2.ถามเพื่อให้เข้าใจปัญหา</p>
+</div>
+</div>
+<div class="feature-box" style="width:32%">
+<div class="problem-icon-container" style="animation:pulse 2s infinite 1s"><i class="fas fa-calculator" style="font-size:3.5rem"></i></div>
+<h4 style="margin-bottom:10px;font-size:1.3rem">ปัญหา 3: ใช้ศัพท์เทคนิคเกินจำเป็น</h4>
+<div style="background-color:#164a41;padding:8px;border-radius:5px;margin-top:10px;display:flex;align-items:center">
+<span style="color:#4cc9f0;margin-right:10px;font-weight:bold">✓</span>
+<p>1.เลี่ยงศัพท์เทคนิคที่ไม่จำเป็น</p>
+</div>
+<div style="background-color:#164a41;padding:8px;border-radius:5px;margin-top:10px;display:flex;align-items:center">
+<span style="color:#4cc9f0;margin-right:10px;font-weight:bold">✓</span>
+<p>2.อธิบายพร้อมตัวอย่างที่เข้าใจง่าย</p>
+</div>
+<div style="background-color:#164a41;padding:8px;border-radius:5px;margin-top:10px;display:flex;align-items:center">
+<span style="color:#4cc9f0;margin-right:10px;font-weight:bold">✓</span>
+<p>3.เปรียบเทียบกับสิ่งที่ผู้ฟังคุ้นเคย</p>
+</div>
+</div>
+</div>
+<div class="citation">
+* อ้างอิงจาก: "Barriers to Effective Communication" - Journal of Communication Research (2022)
+</div>
+</div>
+</div>
+
+<!-- Slide 4 -->
+<div class="slide-container" id="slide-4">
+<h1 class="slide-header">เทคนิคการฟังเพื่อเพิ่มประสิทธิภาพการทำงาน</h1>
+<div class="slide-content">
+<div style="display:flex;flex-wrap:wrap;width:100%;justify-content:space-between">
+<div class="info-card" style="width:48%;padding:15px;margin-bottom:10px;background-color:#16213e">
+<h3 style="color:#4cc9f0;font-size:1.4rem;margin-bottom:10px;text-align:center"><i class="fas fa-brain"></i> 4 รูปแบบการฟังและประสิทธิภาพ</h3>
+<div class="listening-types">
+<svg width="100%" height="280" viewBox="0 0 400 280">
+  <!-- ฟังเชิงลึก 85% -->
+  <g class="listening-type" transform="translate(0,0)">
+    <rect x="10" y="10" width="380" height="60" rx="8" fill="url(#gradientDeep)" stroke="#3aff3a" stroke-width="1"/>
+    <text x="20" y="30" fill="white" font-weight="bold" font-size="16">ฟังเชิงลึก</text>
+    <text x="20" y="55" fill="#e6ffee" font-size="12">เข้าใจทั้งเนื้อหาและความรู้สึก วิเคราะห์ความหมายแฝง</text>
+    
+    <!-- Percentage bar -->
+    <rect x="280" y="20" width="100" height="20" rx="10" fill="#1e2a57" stroke="#3aff3a" stroke-width="1"/>
+    <rect x="280" y="20" width="85" height="20" rx="10" fill="#1e8c3a"/>
+    <text x="330" y="35" fill="#ffde3b" font-weight="bold" font-size="16" text-anchor="middle">85%</text>
+  </g>
+  
+  <!-- ฟังเชิงวิเคราะห์ 80% -->
+  <g class="listening-type" transform="translate(0,70)">
+    <rect x="10" y="10" width="380" height="60" rx="8" fill="url(#gradientAnalytical)" stroke="#45b6fe" stroke-width="1"/>
+    <text x="20" y="30" fill="white" font-weight="bold" font-size="16">ฟังเชิงวิเคราะห์</text>
+    <text x="20" y="55" fill="#d6edff" font-size="12">แยกแยะข้อเท็จจริง ประเมินความน่าเชื่อถือ</text>
+    
+    <!-- Percentage bar -->
+    <rect x="280" y="20" width="100" height="20" rx="10" fill="#1e2a57" stroke="#45b6fe" stroke-width="1"/>
+    <rect x="280" y="20" width="80" height="20" rx="10" fill="#0073cf"/>
+    <text x="330" y="35" fill="#ffd700" font-weight="bold" font-size="16" text-anchor="middle">80%</text>
+  </g>
+  
+  <!-- ฟังอย่างตั้งใจ 75% -->
+  <g class="listening-type" transform="translate(0,140)">
+    <rect x="10" y="10" width="380" height="60" rx="8" fill="url(#gradientAttentive)" stroke="#7ba4e3" stroke-width="1"/>
+    <text x="20" y="30" fill="white" font-weight="bold" font-size="16">ฟังอย่างตั้งใจ</text>
+    <text x="20" y="55" fill="#c9dcf8" font-size="12">จับประเด็นหลักได้ ตอบสนองได้เหมาะสม</text>
+    
+    <!-- Percentage bar -->
+    <rect x="280" y="20" width="100" height="20" rx="10" fill="#1e2a57" stroke="#7ba4e3" stroke-width="1"/>
+    <rect x="280" y="20" width="75" height="20" rx="10" fill="#285ba7"/>
+    <text x="330" y="35" fill="#a3d4ff" font-weight="bold" font-size="16" text-anchor="middle">75%</text>
+  </g>
+  
+  <!-- ฟังผิวเผิน 25% -->
+  <g class="listening-type" transform="translate(0,210)">
+    <rect x="10" y="10" width="380" height="60" rx="8" fill="url(#gradientSurface)" stroke="#ff5252" stroke-width="1"/>
+    <text x="20" y="30" fill="white" font-weight="bold" font-size="16">ฟังผิวเผิน</text>
+    <text x="20" y="55" fill="#ffd6d6" font-size="12">เสี่ยงต่อความเข้าใจผิด ขาดการจดจ่อ</text>
+    
+    <!-- Percentage bar -->
+    <rect x="280" y="20" width="100" height="20" rx="10" fill="#1e2a57" stroke="#ff5252" stroke-width="1"/>
+    <rect x="280" y="20" width="25" height="20" rx="10" fill="#b52828"/>
+    <text x="330" y="35" fill="#ffb6b6" font-weight="bold" font-size="16" text-anchor="middle">25%</text>
+  </g>
+  
+  <!-- Gradients definitions -->
+  <defs>
+    <linearGradient id="gradientDeep" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e8c3a" />
+      <stop offset="100%" stop-color="#064e1b" />
+    </linearGradient>
+    <linearGradient id="gradientAnalytical" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0073cf" />
+      <stop offset="100%" stop-color="#004a85" />
+    </linearGradient>
+    <linearGradient id="gradientAttentive" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#285ba7" />
+      <stop offset="100%" stop-color="#173763" />
+    </linearGradient>
+    <linearGradient id="gradientSurface" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b52828" />
+      <stop offset="100%" stop-color="#7a1414" />
+    </linearGradient>
+  </defs>
+</svg>
+<div class="source-section">
+<div class="source-title"><i class="fas fa-link"></i> แหล่งข้อมูล</div>
+<ul class="source-list">
+<li><a href="https://www.listen.org" target="_blank">International Listening Association (2023)</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="info-card" style="width:48%;padding:15px;margin-bottom:10px">
+<h3 style="color:#4cc9f0;font-size:1.4rem;margin-bottom:10px"><i class="fas fa-briefcase"></i> การนำไปประยุกต์ใช้ในการทำงาน</h3>
+<div style="display:flex;justify-content:space-between;flex-wrap:wrap">
+<div class="feature-box" style="width:100%;margin-bottom:10px;padding:10px">
+<h4 style="color:#f72585;margin-bottom:5px;font-size:1.1rem"><i class="fas fa-users"></i> การประชุมธุรกิจ</h4>
+<p style="font-size:0.9rem">ใช้การฟังเชิงวิเคราะห์เพื่อแยกแยะข้อมูลสำคัญ แยกแยะข้อเท็จจริงจากความคิดเห็น และประเมินข้อเสนอต่างๆ อย่างมีวิจารณญาณ</p>
+</div>
+<div class="feature-box" style="width:100%;margin-bottom:10px;padding:10px">
+<h4 style="color:#f72585;margin-bottom:5px;font-size:1.1rem"><i class="fas fa-comments"></i> การให้คำปรึกษา</h4>
+<p style="font-size:0.9rem">ใช้การฟังเชิงลึกเพื่อเข้าใจทั้งเนื้อหาและอารมณ์ความรู้สึก สร้างความไว้วางใจ และเข้าถึงปัญหาที่แท้จริง</p>
+</div>
+<div class="feature-box" style="width:100%;margin-bottom:10px;padding:10px">
+<h4 style="color:#f72585;margin-bottom:5px;font-size:1.1rem"><i class="fas fa-tasks"></i> การรับมอบหมายงาน</h4>
+<p style="font-size:0.9rem">ใช้การฟังอย่างตั้งใจเพื่อจับประเด็นสำคัญ เข้าใจขอบเขตงาน และสามารถปฏิบัติตามคำสั่งได้อย่างถูกต้อง</p>
+</div>
+</div>
+</div>
+<div class="info-card" style="width:100%;padding:15px;margin-top:0">
+<h3 style="color:#4cc9f0;font-size:1.4rem;margin-bottom:10px"><i class="fas fa-chart-bar"></i> ผลการวิจัยจาก Harvard Business Review</h3>
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between">
+<div style="width:48%;background-color:#1e2a57;padding:15px;border-radius:8px;margin-bottom:10px;border-left:5px solid #ffd700">
+<div style="display:flex;align-items:center">
+<i class="fas fa-chart-line" style="margin-right:10px;color:#ffd700;font-size:1.8rem"></i>
+<div>
+<h4 style="color:#4cc9f0;margin-bottom:5px;font-size:1.1rem">เวลาในการทำงานร่วมกัน</h4>
+<p style="font-size:0.95rem">เพิ่มขึ้นกว่า <span style="color:#ffd700;font-weight:bold;font-size:1.2rem">50%</span> ในช่วง 2 ทศวรรษที่ผ่านมา</p>
+</div>
+</div>
+</div>
+<div style="width:48%;background-color:#1e2a57;padding:15px;border-radius:8px;margin-bottom:10px;border-left:5px solid #ffd700">
+<div style="display:flex;align-items:center">
+<i class="fas fa-handshake" style="margin-right:10px;color:#ffd700;font-size:1.8rem"></i>
+<div>
+<h4 style="color:#4cc9f0;margin-bottom:5px;font-size:1.1rem">ปัจจัยแห่งความสำเร็จ</h4>
+<p style="font-size:0.95rem">การสื่อสารที่มีประสิทธิภาพเป็น<span style="color:#ffd700;font-weight:bold">ปัจจัยสำคัญอันดับ 1</span> ในการทำงานร่วมกัน</p>
+</div>
+</div>
+</div>
+</div>
+<div class="source-section">
+<div class="source-title"><i class="fas fa-link"></i> แหล่งข้อมูล</div>
+<ul class="source-list">
+<li><a href="https://hbr.org/2016/01/collaborative-overload" target="_blank">HBR: Collaborative Overload (2016)</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Slide 5 -->
+<div class="slide-container" id="slide-5">
+<h1 class="slide-header" style="font-size:2.4rem;margin-bottom:5px">กฎ 5 วินาที: เทคนิคเพิ่มพลังการสื่อสาร</h1>
+<div style="text-align:center;margin-bottom:5px">
+<div style="display:flex;justify-content:center;align-items:center;gap:10px">
+<div id="count-1" style="width:35px;height:35px;border-radius:50%;background-color:#f9c80e;color:#1a1a2e;font-size:1.5rem;font-weight:bold;display:flex;align-items:center;justify-content:center">1</div>
+<div id="count-2" style="width:35px;height:35px;border-radius:50%;background-color:#f9c80e;color:#1a1a2e;font-size:1.5rem;font-weight:bold;display:flex;align-items:center;justify-content:center">2</div>
+<div id="count-3" style="width:35px;height:35px;border-radius:50%;background-color:#f9c80e;color:#1a1a2e;font-size:1.5rem;font-weight:bold;display:flex;align-items:center;justify-content:center">3</div>
+<div id="count-4" style="width:35px;height:35px;border-radius:50%;background-color:#f9c80e;color:#1a1a2e;font-size:1.5rem;font-weight:bold;display:flex;align-items:center;justify-content:center">4</div>
+<div id="count-5" style="width:35px;height:35px;border-radius:50%;background-color:#f9c80e;color:#1a1a2e;font-size:1.5rem;font-weight:bold;display:flex;align-items:center;justify-content:center">5</div>
+</div>
+</div>
+<div class="slide-content">
+<div style="display:flex;flex-wrap:wrap;width:100%;justify-content:space-between">
+<div class="info-card" style="width:48%">
+<h3 style="color:#4cc9f0;font-size:1.3rem;margin-bottom:6px"><i class="fas fa-bullseye"></i> วิธีการปฏิบัติ</h3>
+<div class="step-box">
+<div id="listen-circle" class="step-number" style="background-color:#4cc9f0">1</div>
+<div style="color:white;font-size:1.1rem">รับฟัง (Listen)</div>
+</div>
+<div class="step-description">ตั้งใจฟังอย่างเต็มที่ จับประเด็นสำคัญ สังเกตน้ำเสียง</div>
+<div class="step-box">
+<div id="pause-circle" class="step-number" style="background-color:#f9c80e">2</div>
+<div style="color:white;font-size:1.1rem">หยุด (Pause)</div>
+</div>
+<div class="step-description">นับ 1-5 ในใจ ให้เวลาประมวลผลข้อมูล</div>
+<div class="step-box">
+<div id="respond-circle" class="step-number" style="background-color:#2a9d8f">3</div>
+<div style="color:white;font-size:1.1rem">ตอบ (Respond)</div>
+</div>
+<div class="step-description">ตอบอย่างมีสติ ชัดเจน และตรงประเด็น</div>
+</div>
+<div class="info-card" style="width:48%">
+<h3 style="color:#4cc9f0;font-size:1.3rem;margin-bottom:6px"><i class="fas fa-chart-pie"></i> ผลลัพธ์ที่พิสูจน์ได้</h3>
+<div style="display:flex;justify-content:space-around;flex-wrap:wrap">
+<div class="stat-box" style="flex-basis:48%;animation:fadeIn 0.6s ease-out">
+<div class="stat-value">40%</div>
+<div style="font-size:1rem">เพิ่มความน่าเชื่อถือ</div>
+</div>
+<div class="stat-box" style="flex-basis:48%;animation:fadeIn 0.6s ease-out 0.2s">
+<div class="stat-value">85%</div>
+<div style="font-size:1rem">การตัดสินใจดีขึ้น</div>
+</div>
+<div class="stat-box" style="flex-basis:48%;animation:fadeIn 0.6s ease-out 0.4s">
+<div class="stat-value">75%</div>
+<div style="font-size:1rem">เพิ่มประสิทธิภาพ</div>
+</div>
+<div class="stat-box" style="flex-basis:48%;animation:fadeIn 0.6s ease-out 0.6s">
+<div class="stat-value">60%</div>
+<div style="font-size:1rem">ลดความขัดแย้ง</div>
+</div>
+</div>
+</div>
+<div class="info-card" style="width:100%">
+<h3 style="color:#4cc9f0;font-size:1.3rem;margin-bottom:6px"><i class="fas fa-lightbulb"></i> ตัวอย่างการใช้งาน</h3>
+<div style="display:flex;justify-content:space-between;flex-wrap:wrap">
+<div style="width:32%;background-color:#1e2a57;padding:7px;border-radius:8px;margin-bottom:5px;animation:fadeInUp 0.6s ease-out">
+<div style="color:#f72585;margin-bottom:5px;font-size:1rem;text-align:center">การประชุม</div>
+<div style="display:flex;flex-direction:column;gap:5px">
+<div class="example-box" style="background-color:#502e2e;border:1px solid #e63946;padding:6px;border-radius:5px;font-size:.85rem;margin-bottom:5px">
+<span style="font-weight:bold"><i class="fas fa-times-circle"></i> ไม่ใช้:</span> "ผมคิดว่าน่าจะลงทุนนะครับ"
+</div>
+<div class="example-box" style="background-color:#184e77;border:1px solid #4cc9f0;padding:6px;border-radius:5px;font-size:.85rem;margin-bottom:5px">
+<span style="font-weight:bold"><i class="fas fa-check-circle"></i> ใช้:</span> "จากการวิเคราะห์ ROI เราควรลงทุน แต่ทำเป็นเฟส"
+</div>
+</div>
+</div>
+<div style="width:32%;background-color:#1e2a57;padding:7px;border-radius:8px;margin-bottom:5px;animation:fadeInUp 0.6s ease-out 0.2s">
+<div style="color:#f72585;margin-bottom:5px;font-size:1rem;text-align:center">การสัมภาษณ์งาน</div>
+<div style="display:flex;flex-direction:column;gap:5px">
+<div class="example-box" style="background-color:#502e2e;border:1px solid #e63946;padding:6px;border-radius:5px;font-size:.85rem;margin-bottom:5px">
+<span style="font-weight:bold"><i class="fas fa-times-circle"></i> ไม่ใช้:</span> "ผมไม่มีจุดอ่อนที่ส่งผลต่องานครับ"
+</div>
+<div class="example-box" style="background-color:#184e77;border:1px solid #4cc9f0;padding:6px;border-radius:5px;font-size:.85rem;margin-bottom:5px">
+<span style="font-weight:bold"><i class="fas fa-check-circle"></i> ใช้:</span> "ผมมักละเอียดเกินไป แต่ได้พัฒนาระบบตรวจสอบที่มีประสิทธิภาพ"
+</div>
+</div>
+</div>
+<div style="width:32%;background-color:#1e2a57;padding:7px;border-radius:8px;margin-bottom:5px;animation:fadeInUp 0.6s ease-out 0.4s">
+<div style="color:#f72585;margin-bottom:5px;font-size:1rem;text-align:center">เมื่อถูกวิจารณ์</div>
+<div style="display:flex;flex-direction:column;gap:5px">
+<div class="example-box" style="background-color:#502e2e;border:1px solid #e63946;padding:6px;border-radius:5px;font-size:.85rem;margin-bottom:5px">
+<span style="font-weight:bold"><i class="fas fa-times-circle"></i> ไม่ใช้:</span> "ฉันตรวจทานแล้ว คงไม่มีอะไรผิดเยอะขนาดนั้น"
+</div>
+<div class="example-box" style="background-color:#184e77;border:1px solid #4cc9f0;padding:6px;border-radius:5px;font-size:.85rem;margin-bottom:5px">
+<span style="font-weight:bold"><i class="fas fa-check-circle"></i> ใช้:</span> "ขอบคุณสำหรับคำแนะนำ ช่วยชี้จุดที่ผิดพลาดให้หน่อย"
+</div>
+</div>
+</div>
+</div>
+<div class="source-section">
+<div class="source-title"><i class="fas fa-link"></i> แหล่งข้อมูล</div>
+<ul class="source-list">
+<li><a href="https://www.melrobbins.com/5-second-rule" target="_blank">Mel Robbins - The 5 Second Rule (2017)</a></li>
+<li><a href="https://mitsloan.mit.edu/ideas-made-to-matter/communication" target="_blank">MIT Sloan - ประสิทธิภาพการสื่อสารในองค์กร (2022)</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Slides 6 -->
+<div class="slide-container" id="slide-6">
+<h1 class="slide-header">เทคนิคการถามเพื่อกระตุ้นความคิด</h1>
+<div class="slide-content">
+<div style="display:flex;flex-wrap:wrap;width:100%;justify-content:space-between">
+<div class="info-card" style="width:60%;animation:fadeIn 0.8s ease-out">
+<h3 style="color:#4cc9f0;font-size:1.6rem;margin-bottom:15px;text-align:center"><i class="fas fa-cogs"></i> เทคนิคการถามและการนำไปใช้</h3>
+<div style="margin-bottom:20px;padding:15px;background-color:#1e2a57;border-radius:8px;border-left:5px solid #ff1493">
+<h4 style="color:#ff1493;margin-bottom:10px;font-size:1.4rem">
+<span id="clarify-text" class="highlight-text"><i class="fas fa-search"></i> Clarify "ช่วยอธิบายเพิ่มได้ไหมว่า...?"</span>
+</h4>
+<p style="font-size:1.1rem"><i class="fas fa-arrow-right" style="color:#4cc9f0;margin-right:8px"></i> เมื่อต้องการความชัดเจนเพิ่มเติม</p>
+<div style="margin-top:8px;padding:10px;background-color:#193561;border-radius:5px">
+<p style="margin:0;font-size:0.95rem"><strong>สถานการณ์:</strong> เมื่อได้รับมอบหมายงาน หรือมีการอธิบายที่คลุมเครือ</p>
+<p style="margin-top:5px;font-size:0.95rem"><strong>ตัวอย่าง:</strong> "ช่วยอธิบายเพิ่มเติมเกี่ยวกับเป้าหมายของโครงการนี้ได้ไหมครับ?"</p>
+<p style="margin-top:5px;font-size:0.95rem"><strong>ประโยชน์:</strong> ลดความเข้าใจผิด และช่วยให้งานมีทิศทางที่ชัดเจน</p>
+</div>
+</div>
+<div style="margin-bottom:20px;padding:15px;background-color:#1e2a57;border-radius:8px;border-left:5px solid #ff1493">
+<h4 style="color:#ff1493;margin-bottom:10px;font-size:1.4rem">
+<span id="challenge-text" class="highlight-text"><i class="fas fa-bolt"></i> Challenge "ถ้าเกิด...จะแก้ยังไง?"</span>
+</h4>
+<p style="font-size:1.1rem"><i class="fas fa-arrow-right" style="color:#4cc9f0;margin-right:8px"></i> เมื่อต้องการกระตุ้นให้คิดนอกกรอบ</p>
+<div style="margin-top:8px;padding:10px;background-color:#193561;border-radius:5px">
+<p style="margin:0;font-size:0.95rem"><strong>สถานการณ์:</strong> ในการประชุมวางแผน หรือรับมือกับความเสี่ยง</p>
+<p style="margin-top:5px;font-size:0.95rem"><strong>ตัวอย่าง:</strong> "ถ้าเกิดลูกค้าไม่พอใจกับแผนนี้ เราจะมีแผนสำรองอย่างไร?"</p>
+<p style="margin-top:5px;font-size:0.95rem"><strong>ประโยชน์:</strong> เตรียมพร้อมรับมือสถานการณ์ และแสดงถึงความรอบคอบ</p>
+</div>
+</div>
+<div style="margin-bottom:20px;padding:15px;background-color:#1e2a57;border-radius:8px;border-left:5px solid #ff1493">
+<h4 style="color:#ff1493;margin-bottom:10px;font-size:1.4rem">
+<span id="conclusion-text" class="highlight-text"><i class="fas fa-check-square"></i> Conclusion "จากที่พูดมา สรุปได้ว่า...ใช่ไหม?"</span>
+</h4>
+<p style="font-size:1.1rem"><i class="fas fa-arrow-right" style="color:#4cc9f0;margin-right:8px"></i> เมื่อต้องการยืนยันความเข้าใจตรงกัน</p>
+<div style="margin-top:8px;padding:10px;background-color:#193561;border-radius:5px">
+<p style="margin:0;font-size:0.95rem"><strong>สถานการณ์:</strong> ปิดประชุม สรุปข้อตกลง หรือยืนยันแผนงาน</p>
+<p style="margin-top:5px;font-size:0.95rem"><strong>ตัวอย่าง:</strong> "จากที่เราคุยกัน ผมเข้าใจว่าเราจะเริ่มโครงการในเดือนหน้า และใช้งบประมาณไม่เกิน 5 แสนบาท ถูกต้องไหมครับ?"</p>
+<p style="margin-top:5px;font-size:0.95rem"><strong>ประโยชน์:</strong> ป้องกันความเข้าใจผิด และเพิ่มความชัดเจนในการทำงาน</p>
+</div>
+</div>
+</div>
+<div class="info-card" style="width:36%;animation:fadeIn 0.8s ease-out 0.2s">
+<h3 style="color:#4cc9f0;font-size:1.6rem;margin-bottom:15px;text-align:center"><i class="fas fa-question-circle"></i> สิ่งที่ควรรู้</h3>
+<ul style="list-style-type:none;padding-left:0">
+<li style="margin-bottom:12px;display:flex;align-items:flex-start;animation:fadeInUp 0.5s ease-out">
+<span style="margin-right:10px;font-size:1.2rem">✅</span>
+<span>การตั้งคำถามที่ดีช่วยให้เข้าใจปัญหาลึกขึ้น 80%</span>
+</li>
+<li style="margin-bottom:12px;display:flex;align-items:flex-start;animation:fadeInUp 0.5s ease-out 0.2s">
+<span style="margin-right:10px;font-size:1.2rem">✅</span>
+<span>ลดความขัดแย้งในการสนทนาได้ถึง 60%</span>
+</li>
+<li style="margin-bottom:12px;display:flex;align-items:flex-start;animation:fadeInUp 0.5s ease-out 0.4s">
+<span style="margin-right:10px;font-size:1.2rem">✅</span>
+<span>ใช้คำถามปลายเปิดช่วยให้เกิดแนวคิดสร้างสรรค์</span>
+</li>
+</ul>
+<div style="padding:15px;background-color:#1e2a57;border-radius:8px;border-left:5px solid #ff1493;margin-bottom:15px">
+<h4 style="color:#4cc9f0;margin-bottom:10px;font-size:1.1rem">หลีกเลี่ยง</h4>
+<ul style="list-style-type:none;padding-left:0">
+<li style="margin-bottom:8px;display:flex;align-items:flex-start">
+<span style="margin-right:8px;color:#e63946"><i class="fas fa-times-circle"></i></span>
+<span style="font-size:0.9rem">คำถามชี้นำที่บีบให้ตอบตามที่เราต้องการ</span>
+</li>
+<li style="margin-bottom:8px;display:flex;align-items:flex-start">
+<span style="margin-right:8px;color:#e63946"><i class="fas fa-times-circle"></i></span>
+<span style="font-size:0.9rem">คำถามที่ทำให้รู้สึกถูกจับผิดหรือกล่าวโทษ</span>
+</li>
+</ul>
+</div>
+<div class="quote-box" style="animation:fadeIn 0.8s ease-out 0.8s">
+<p>"คำถามที่ดีมีพลังกว่าคำตอบ<br>เพราะกระตุ้นให้เกิดการคิดและพัฒนา"</p>
+<p style="text-align:right;font-size:0.8rem">- Peter Drucker</p>
+</div>
+<div class="source-section">
+<div class="source-title"><i class="fas fa-link"></i> แหล่งข้อมูล</div>
+<ul class="source-list">
+<li><a href="https://hbr.org/2019/05/the-surprising-power-of-questions" target="_blank">HBR - The Power of Questions (2019)</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Slide 7 -->
+<div class="slide-container" id="slide-7">
+<h1 class="slide-header">แนวทางที่ใช้ได้จริงในการประชุม</h1>
+<div class="slide-content">
+<div class="info-card" style="width:100%;animation:fadeIn 0.8s ease-out">
+<h3 style="color:#4cc9f0;font-size:1.6rem;margin-bottom:20px;text-align:center"><i class="fas fa-users"></i> ลดเวลาประชุม 50% ด้วยเทคนิคง่าย ๆ</h3>
+<div style="margin-bottom:20px;padding:15px;background-color:#1e2a57;border-radius:8px;border-left:5px solid #f72585;animation:fadeInUp 0.5s ease-out">
+<h4 style="color:#f72585;margin-bottom:10px;font-size:1.3rem"><i class="fas fa-stopwatch"></i> ใช้กฎ "1 คนพูดไม่เกิน 1 นาที"</h4>
+</div>
+<div style="margin-bottom:20px;padding:15px;background-color:#1e2a57;border-radius:8px;border-left:5px solid #f72585;animation:fadeInUp 0.5s ease-out 0.2s">
+<h4 style="color:#f72585;margin-bottom:10px;font-size:1.3rem"><i class="fas fa-question-circle"></i> เริ่มประชุมด้วยคำถาม "สิ่งที่ต้องตัดสินใจวันนี้คืออะไร?"</h4>
+</div>
+<div class="quote-box" style="animation:fadeIn 0.8s ease-out 0.4s;text-align:center">
+<p>เทคนิคนี้ช่วยให้การประชุมมีจุดมุ่งหมาย ลดเวลาการพูดที่ไม่จำเป็นและเพิ่มประสิทธิภาพการตัดสินใจ!</p>
+</div>
+<div style="display:flex;justify-content:space-between;margin-top:20px">
+<div style="width:48%;padding:15px;background-color:#1e2a57;border-radius:8px;border-left:5px solid #f72585;animation:fadeInUp 0.5s ease-out 0.6s">
+<h4 style="color:#f72585;margin-bottom:15px"><i class="fas fa-check-circle"></i> ผลลัพธ์ที่ได้</h4>
+<ul style="list-style-type:none;padding-left:0">
+<li style="margin-bottom:8px;display:flex;align-items:flex-start">
+<span style="margin-right:10px">✅</span>
+<span>เวลาประชุมลดลง 50%</span>
+</li>
+<li style="margin-bottom:8px;display:flex;align-items:flex-start">
+<span style="margin-right:10px">✅</span>
+<span>การตัดสินใจมีประสิทธิภาพมากขึ้น</span>
+</li>
+<li style="margin-bottom:8px;display:flex;align-items:flex-start">
+<span style="margin-right:10px">✅</span>
+<span>ทุกคนมีส่วนร่วมมากขึ้น</span>
+</li>
+</ul>
+</div>
+<div style="width:48%;padding:15px;background-color:#1e2a57;border-radius:8px;border-left:5px solid #f72585;animation:fadeInUp 0.5s ease-out 0.8s">
+<h4 style="color:#f72585;margin-bottom:15px"><i class="fas fa-question-circle"></i> ทำไมเทคนิคนี้ได้ผล?</h4>
+<ul style="list-style-type:none;padding-left:0">
+<li style="margin-bottom:8px;display:flex;align-items:flex-start">
+<span style="margin-right:10px">✅</span>
+<span>ลดการพูดเยิ่นเย้อและออกนอกเรื่อง</span>
+</li>
+<li style="margin-bottom:8px;display:flex;align-items:flex-start">
+<span style="margin-right:10px">✅</span>
+<span>ช่วยให้ทุกคนเตรียมตัวมาก่อนประชุม</span>
+</li>
+<li style="margin-bottom:8px;display:flex;align-items:flex-start">
+<span style="margin-right:10px">✅</span>
+<span>ทำให้เป้าหมายของประชุมชัดเจน</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="source-section">
+<div class="source-title"><i class="fas fa-link"></i> แหล่งข้อมูล</div>
+<ul class="source-list">
+<li><a href="https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/better-meetings-worth-millions" target="_blank">McKinsey - Better Meetings Worth Millions (2022)</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Slide 8 -->
+<div class="slide-container" id="slide-8">
+<h1 class="slide-header" style="margin-bottom:5px">สรุป 3 เทคนิคในชีวิตจริง</h1>
+<div class="slide-content" style="margin-top:5px">
+<div style="width:100%;display:flex;flex-direction:column;gap:8px">
+<div style="padding:10px;background-color:#1e2a57;border-radius:8px;border-left:5px solid #f72585">
+<h4 style="color:#f72585;margin-bottom:5px;font-size:1.1rem"><i class="fas fa-exclamation-circle"></i> ถูกวิพากษ์วิจารณ์ (ที่ทำงาน หรือ รับ Feedback) → 5 Sec หยุด ... เพื่อเพิ่มความน่าเชื่อถือ</h4>
+<div style="padding:8px;border-radius:8px;background-color:#184e77;border:1px solid #4cc9f0;margin-top:5px">
+<h4 style="margin-bottom:5px;font-size:1rem"><i class="fas fa-check-circle"></i> "ขอบคุณที่แชร์... (หยุด)... ผมจะนำไปปรับปรุง"</h4>
+<div style="display:flex;flex-wrap:wrap;gap:5px">
+<div style="display:flex;align-items:flex-start;width:48%">
+<span style="margin-right:5px;color:#4cc9f0">✓</span>
+<span style="font-size:0.9rem">หยุด 5 วินาที เพื่อคิดและตอบสนองอย่างมีสติ</span>
+</div>
+<div style="display:flex;align-items:flex-start;width:48%">
+<span style="margin-right:5px;color:#4cc9f0">✓</span>
+<span style="font-size:0.9rem">การขอบคุณช่วยลดความขัดแย้ง</span>
+</div>
+</div>
+</div>
+</div>
+<div style="padding:10px;background-color:#1e2a57;border-radius:8px;border-left:5px solid #f72585">
+<h4 style="color:#f72585;margin-bottom:5px;font-size:1.1rem"><i class="fas fa-comment-dots"></i> รับฟังข้อร้องเรียน (ลูกค้า หรือ เพื่อนร่วมงาน) → ฟังให้ลึกกว่าคำพูด</h4>
+<div style="padding:8px;border-radius:8px;background-color:#184e77;border:1px solid #4cc9f0;margin-top:5px">
+<h4 style="margin-bottom:5px;font-size:1rem"><i class="fas fa-check-circle"></i> "คุณรู้สึกว่า...เพราะ...ใช่ไหม?"</h4>
+<div style="display:flex;flex-wrap:wrap;gap:5px">
+<div style="display:flex;align-items:flex-start;width:48%">
+<span style="margin-right:5px;color:#4cc9f0">✓</span>
+<span style="font-size:0.9rem">ฟังอารมณ์และความต้องการที่ซ่อนอยู่</span>
+</div>
+<div style="display:flex;align-items:flex-start;width:48%">
+<span style="margin-right:5px;color:#4cc9f0">✓</span>
+<span style="font-size:0.9rem">ใช้คำถามให้คู่สนทนาอธิบายความรู้สึก</span>
+</div>
+</div>
+</div>
+</div>
+<div style="padding:10px;background-color:#1e2a57;border-radius:8px;border-left:5px solid #f72585">
+<h4 style="color:#f72585;margin-bottom:5px;font-size:1.1rem"><i class="fas fa-users"></i> ประชุมไม่เห็นด้วย (Meeting หรือ Discussion) → เทคนิคการถามเพื่อกระตุ้นความคิด</h4>
+<div style="padding:8px;border-radius:8px;background-color:#184e77;border:1px solid #4cc9f0;margin-top:5px">
+<h4 style="margin-bottom:5px;font-size:1rem"><i class="fas fa-check-circle"></i> "ถ้าเลือกวิธีนี้ มีอะไรต้องระวังบ้าง?"</h4>
+<div style="display:flex;flex-wrap:wrap;gap:5px">
+<div style="display:flex;align-items:flex-start;width:48%">
+<span style="margin-right:5px;color:#4cc9f0">✓</span>
+<span style="font-size:0.9rem">ใช้คำถามกระตุ้นการคิด ไม่ใช่การให้คำตอบตรงๆ</span>
+</div>
+<div style="display:flex;align-items:flex-start;width:48%">
+<span style="margin-right:5px;color:#4cc9f0">✓</span>
+<span style="font-size:0.9rem">ท้าทายความคิด ทำให้คู่สนทนาคิดวิเคราะห์</span>
+</div>
+</div>
+</div>
+</div>
+<div class="source-section">
+<div class="source-title"><i class="fas fa-link"></i> แหล่งข้อมูล</div>
+<ul class="source-list">
+<li><a href="https://hbr.org/2016/11/how-to-make-your-one-on-ones-with-employees-more-productive" target="_blank">HBR - Productive One-on-Ones (2016)</a></li>
+<li><a href="https://www.forbes.com/sites/forbescoachescouncil/2018/05/01/15-ways-to-effectively-address-employee-complaints/" target="_blank">Forbes - Addressing Complaints (2018)</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Slide 9 -->
+<div class="slide-container" id="slide-9">
+<div class="slide-conclusion-wrapper" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:80%;max-width:800px;text-align:center">
+<h1 class="slide-header" style="font-size:3rem;text-align:center;padding:30px;text-shadow:3px 3px 6px rgba(0,0,0,0.9);color:#FFD700;background:linear-gradient(135deg,rgba(255,215,0,0.1),rgba(255,215,0,0.3));border-radius:15px;border:2px solid rgba(255,215,0,0.5);animation:fadeIn 1.5s ease-out;line-height:1.4;white-space:normal;overflow-wrap:break-word;min-height:150px">
+การสื่อสารที่ทรงพลังที่สุด...<br>คือการทำให้ผู้ฟังรู้ว่าเขาถูกเข้าใจ
+</h1>
+</div>
+</div>
+
+<!-- Slide 10 - References -->
+<div class="slide-container" id="slide-10">
+<h1 class="slide-header">แหล่งอ้างอิง</h1>
+<div class="slide-content">
+<div class="reference-box">
+<h3 class="reference-title"><i class="fas fa-book"></i> การสื่อสารในองค์กร</h3>
+<ul class="reference-list">
+<li>Salesforce Research (2020). "Impact of Communication on Business Success". พบว่า 86% ของผู้นำธุรกิจระบุว่าการสื่อสารที่ไม่มีประสิทธิภาพเป็นสาเหตุหลักของความล้มเหลวในที่ทำงาน</li>
+<li>Harvard Business Review (2016). "Collaborative Overload". <a href="https://hbr.org/2016/01/collaborative-overload" target="_blank" class="reference-link">https://hbr.org/2016/01/collaborative-overload</a></li>
+<li>McKinsey & Company (2022). "Better Meetings Worth Millions". <a href="https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/better-meetings-worth-millions" target="_blank" class="reference-link">https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/better-meetings-worth-millions</a></li>
+</ul>
+</div>
+<div class="reference-box">
+<h3 class="reference-title"><i class="fas fa-ear"></i> เทคนิคการฟังอย่างมีประสิทธิภาพ</h3>
+<ul class="reference-list">
+<li>International Listening Association (2023). "Effective Listening in Workplace". <a href="https://www.listen.org" target="_blank" class="reference-link">https://www.listen.org</a></li>
+<li>Stephen R. Covey (2004). "The 7 Habits of Highly Effective People" - หลักการฟังเพื่อเข้าใจ (Habit 5: Seek First to Understand, Then to Be Understood)</li>
+<li>Journal of Communication Research (2022). "Barriers to Effective Communication". วิเคราะห์ปัญหาและอุปสรรคในการสื่อสารในองค์กร</li>
+</ul>
+</div>
+<div class="reference-box">
+<h3 class="reference-title"><i class="fas fa-clock"></i> กฎ 5 วินาที</h3>
+<ul class="reference-list">
+<li>Mel Robbins (2017). "The 5 Second Rule: Transform your Life, Work, and Confidence with Everyday Courage". <a href="https://www.melrobbins.com/5-second-rule" target="_blank" class="reference-link">https://www.melrobbins.com/5-second-rule</a></li>
+<li>MIT Sloan Management Review (2022). "The Secret to Better Communication". <a href="https://mitsloan.mit.edu/ideas-made-to-matter/communication" target="_blank" class="reference-link">https://mitsloan.mit.edu/ideas-made-to-matter/communication</a></li>
+</ul>
+</div>
+<div class="reference-box">
+<h3 class="reference-title"><i class="fas fa-question-circle"></i> เทคนิคการถามเพื่อกระตุ้นความคิด</h3>
+<ul class="reference-list">
+<li>Harvard Business Review (2019). "The Surprising Power of Questions". <a href="https://hbr.org/2019/05/the-surprising-power-of-questions" target="_blank" class="reference-link">https://hbr.org/2019/05/the-surprising-power-of-questions</a></li>
+<li>Harvard Business Review (2016). "How to Make Your One-on-Ones with Employees More Productive". <a href="https://hbr.org/2016/11/how-to-make-your-one-on-ones-with-employees-more-productive" target="_blank" class="reference-link">https://hbr.org/2016/11/how-to-make-your-one-on-ones-with-employees-more-productive</a></li>
+<li>John Whitmore (2009). "Coaching for Performance: The Principles and Practice of Coaching and Leadership". หลักการใช้คำถามแบบ GROW Model</li>
+<li>Forbes (2018). "15 Ways to Effectively Address Employee Complaints". <a href="https://www.forbes.com/sites/forbescoachescouncil/2018/05/01/15-ways-to-effectively-address-employee-complaints/" target="_blank" class="reference-link">https://www.forbes.com/sites/forbescoachescouncil/2018/05/01/15-ways-to-effectively-address-employee-complaints/</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- Navigation -->
+<div class="slide-nav">
+<div class="nav-buttons">
+<button class="nav-btn prev-btn">
+<i class="fas fa-arrow-left"></i>
+</button>
+<button class="nav-btn next-btn">
+<i class="fas fa-arrow-right"></i>
+</button>
+</div>
+</div>
+<div class="slide-indicator">
+<span id="current-slide">1</span>/<span id="total-slides">10</span>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // ตัวแปรที่ใช้ในการควบคุมสไลด์
+    const slides = document.querySelectorAll('.slide-container');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const currentSlideElement = document.getElementById('current-slide');
+    const totalSlidesElement = document.getElementById('total-slides');
+    
+    let currentIndex = 0;
+    
+    // แสดงจำนวนสไลด์ทั้งหมด
+    totalSlidesElement.textContent = slides.length;
+    currentSlideElement.textContent = currentIndex + 1;
+    
+    // ฟังก์ชันสำหรับเปลี่ยนสไลด์
+    function showSlide(index) {
+        // ตรวจสอบว่าดัชนีอยู่ในช่วงที่ถูกต้อง
+        if (index < 0) index = 0;
+        if (index >= slides.length) index = slides.length - 1;
+        
+        // ซ่อนสไลด์ทั้งหมด
+        slides.forEach(slide => {
+            slide.classList.remove('active');
+        });
+        
+        // แสดงสไลด์ที่ต้องการ
+        slides[index].classList.add('active');
+        
+        // อัปเดตตัวบอกตำแหน่งสไลด์
+        currentSlideElement.textContent = index + 1;
+        
+        // อัปเดตดัชนีปัจจุบัน
+        currentIndex = index;
+        
+        // ตรวจสอบเพื่อเรียกใช้ฟังก์ชันไฮไลท์ข้อความเมื่ออยู่ที่สไลด์ 6
+        if (index === 5) {
+            setTimeout(highlightTexts, 500);
+        }
+    }
+    
+    // ฟังก์ชันสำหรับไฮไลท์ข้อความในสไลด์ 6
+    function highlightTexts() {
+        if (!document.getElementById('slide-6').classList.contains('active')) return;
+        
+        const clarifyText = document.getElementById('clarify-text');
+        const challengeText = document.getElementById('challenge-text');
+        const conclusionText = document.getElementById('conclusion-text');
+        
+        if (clarifyText && challengeText && conclusionText) {
+            // เริ่มแอนิเมชันเป็นลำดับ
+            clarifyText.classList.add('highlight-active');
+            
+            setTimeout(() => {
+                clarifyText.classList.remove('highlight-active');
+                
+                setTimeout(() => {
+                    challengeText.classList.add('highlight-active');
+                    
+                    setTimeout(() => {
+                        challengeText.classList.remove('highlight-active');
+                        
+                        setTimeout(() => {
+                            conclusionText.classList.add('highlight-active');
+                            
+                            setTimeout(() => {
+                                conclusionText.classList.remove('highlight-active');
+                                
+                                // วนซ้ำอีกครั้งหลังจากพัก
+                                setTimeout(highlightTexts, 2000);
+                            }, 1500);
+                        }, 300);
+                    }, 1500);
+                }, 300);
+            }, 1500);
+        }
+    }
+    
+    // เหตุการณ์คลิกปุ่มถัดไป
+    nextBtn.addEventListener('click', function() {
+        showSlide(currentIndex + 1);
+    });
+    
+    // เหตุการณ์คลิกปุ่มก่อนหน้า
+    prevBtn.addEventListener('click', function() {
+        showSlide(currentIndex - 1);
+    });
+    
+    // เพิ่มการควบคุมด้วยคีย์บอร์ด
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') {
+            showSlide(currentIndex - 1);
+        } else if (e.key === 'ArrowRight') {
+            showSlide(currentIndex + 1);
+        }
+    });
+    
+    // เพิ่มการสนับสนุนการสัมผัสสำหรับอุปกรณ์มือถือ
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    document.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    }, false);
+    
+    document.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, false);
+    
+    function handleSwipe() {
+        const swipeDistance = touchEndX - touchStartX;
+        
+        if (Math.abs(swipeDistance) > 50) {
+            if (swipeDistance > 0) {
+                // ปัดจากซ้ายไปขวา (ย้อนกลับ)
+                showSlide(currentIndex - 1);
+            } else {
+                // ปัดจากขวาไปซ้าย (ถัดไป)
+                showSlide(currentIndex + 1);
+            }
+        }
+    }
+    
+    // ฟังก์ชันสำหรับเปลี่ยนเป็นโหมดเต็มหน้าจอเมื่อดับเบิลคลิก
+    let lastClickTime = 0;
+    document.addEventListener('click', function(e) {
+        const currentTime = new Date().getTime();
+        const timeDiff = currentTime - lastClickTime;
+        
+        if (timeDiff > 0 && timeDiff < 500) {
+            // ดับเบิลคลิกตรวจพบ
+            toggleFullScreen();
+        }
+        
+        lastClickTime = currentTime;
+    });
+    
+    function toggleFullScreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(err => {
+                console.log(`Error attempting to enable full-screen mode: ${err.message}`);
+            });
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+    }
+});
+</script>
+</body>
+</html>
