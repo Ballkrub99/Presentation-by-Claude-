@@ -46,32 +46,46 @@ body{background:#121212;color:var(--text);line-height:1.6;overflow:hidden;margin
     font-weight: bold;
     animation: fadeInUp 1s ease-out;
 }
-#slide-2{padding:40px;background-color:var(--primary-bg)}
+#slide-2{padding:40px;background-color:var(--primary-bg);overflow-y:hidden !important;}
 #slide-2 .slide-header{text-align:center;margin-bottom:30px;width:100%}
 #slide-2 .percentage{font-size:6rem;color:var(--accent);font-weight:700;display:inline-block;vertical-align:middle;animation:pulse 2s infinite}
 #slide-2 .header-text{font-size:3rem;vertical-align:middle;color:var(--text)}
-#slide-2 .subtitle{font-size:1.8rem;text-align:center;margin-bottom:30px}
+#slide-2 .subtitle{font-size:1.8rem;text-align:center;margin-bottom:20px}
 #slide-2 .subtitle .highlight{color:#ff4d4d;font-weight:700}
-.boxes-container{display:flex;justify-content:space-between;width:100%;margin-bottom:30px;flex-wrap:wrap}
-.box{width:48%;padding:20px;border-radius:10px;display:flex;flex-direction:column;margin-bottom:15px;animation:fadeIn .8s ease-out}
+.boxes-container{display:flex;justify-content:space-between;width:100%;margin-bottom:20px;flex-wrap:wrap}
+.box{width:48%;padding:15px;border-radius:10px;display:flex;flex-direction:column;margin-bottom:15px;animation:fadeIn .8s ease-out}
 .box.red-box{border:3px solid var(--red);background-color:rgba(230,57,70,.1)}
 .box.green-box{border:3px solid var(--green);background-color:rgba(42,157,143,.1)}
-.box-header{display:flex;align-items:center;margin-bottom:20px;flex-wrap:wrap}
-.box-icon{font-size:3.5rem;margin-right:20px;color:#fff}
-.box-title{font-size:2.2rem;font-weight:700}
+.box-header{display:flex;align-items:center;margin-bottom:20px;flex-wrap:wrap;justify-content:flex-start;}
+/* แก้ไขสำหรับหน้า 2 - ขยายขนาดไอคอนและจัดตำแหน่งใหม่ */
+.box-icon{
+    width: 180px; /* ปรับขนาดให้ใหญ่ขึ้น */
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+}
+.box-icon img {width: 100%; height: 100%; object-fit: contain; filter: brightness(0) invert(1);}
+/* แก้ไขสำหรับหน้า 2 - เลื่อนคำว่า "พูดใส่" กับ "พูดด้วย" ไปทางซ้าย */
+.box-title{
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-align: left;
+    margin-left: 0; /* เพิ่มเติมเพื่อให้ชิดซ้ายมากขึ้น */
+}
 .red-box .box-title{color:var(--red)}
 .green-box .box-title{color:var(--green)}
-.divider{width:100%;height:2px;margin:10px 0 20px}
+.divider{width:100%;height:2px;margin:10px 0 15px}
 .red-box .divider{background-color:var(--red)}
 .green-box .divider{background-color:var(--green)}
-.impact-item{display:flex;align-items:center;margin-bottom:15px}
+.impact-item{display:flex;align-items:center;margin-bottom:12px}
 .impact-icon{width:36px;height:36px;margin-right:15px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:1.2rem}
 .red-box .impact-icon{background-color:rgba(230,57,70,.3)}
 .green-box .impact-icon{background-color:rgba(42,157,143,.3)}
-.impact-item p{font-size:1.3rem}
-.bottom-message{display:flex;align-items:center;justify-content:center;margin-top:20px;margin-bottom:20px;flex-wrap:wrap;text-align:center;animation:fadeInUp 1s ease-out}
+.impact-item p{font-size:1.2rem}
+.bottom-message{display:flex;align-items:center;justify-content:center;margin-top:15px;margin-bottom:15px;flex-wrap:wrap;text-align:center;animation:fadeInUp 1s ease-out}
 .bottom-icon{width:64px;height:64px;margin-right:15px;background-color:rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem}
-.bottom-message p{font-size:1.4rem;text-align:center}
 @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
 @keyframes fadeInOut{0%{opacity:.3;transform:scale(.8)}20%{opacity:1;transform:scale(1.1)}40%,100%{opacity:.3;transform:scale(.8)}}
 @keyframes fadeIn{0%{opacity:0}100%{opacity:1}}
@@ -80,6 +94,7 @@ body{background:#121212;color:var(--text);line-height:1.6;overflow:hidden;margin
 @keyframes highlight-pulse{0%,100%{transform:scale(1);text-shadow:0 0 5px rgba(255,20,147,.1);color:#f72585}50%{transform:scale(1.05);text-shadow:0 0 15px rgba(255,20,147,.8);color:#ff77a8}}
 .slide-header{font-size:2.5rem;color:var(--accent);text-align:center;margin-bottom:20px;text-shadow:1px 1px 3px rgba(0,0,0,.7)}
 .slide-content{display:flex;flex-wrap:wrap;justify-content:space-between;width:100%;max-height:80vh;overflow-y:auto;padding-bottom:50px}
+.slide-content-static{display:flex;flex-wrap:wrap;justify-content:space-between;width:100%;overflow-y:visible;padding-bottom:20px}
 #slide-4 .slide-content,#slide-8 .slide-content{max-height:82vh}
 #slide-8{background-color:#1a1a3a}
 .slide-nav{position:fixed;width:100%;bottom:20px;display:flex;justify-content:center;z-index:100}
@@ -87,7 +102,33 @@ body{background:#121212;color:var(--text);line-height:1.6;overflow:hidden;margin
 .nav-btn{width:50px;height:50px;border-radius:50%;background-color:rgba(0,0,0,.7);color:#fff;border:2px solid var(--accent);font-size:24px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s ease}
 .nav-btn:hover{background-color:var(--accent);color:#000}
 .slide-indicator{position:fixed;bottom:20px;right:20px;background-color:rgba(0,0,0,.7);color:#fff;padding:5px 15px;border-radius:20px;font-weight:700;z-index:100}
-.problem-icon-container{width:200px;height:200px;margin-bottom:15px;display:flex;align-items:center;justify-content:center;background-color:rgba(255,255,255,.1);border-radius:50%;font-size:4rem;margin-left:auto;margin-right:auto}
+/* แก้ไขสำหรับหน้า 3 - ปรับขนาดไอคอนในวงกลม */
+.problem-icon-container{
+    width: 180px; /* ลดขนาดลงจาก 220px */
+    height: 180px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 0 15px rgba(255,255,255,0.1);
+}
+/* แก้ไขขนาดของภาพในไอคอน */
+.problem-icon-container img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+}
+.problem-icon-1 {animation: iconPulse 4.5s infinite 0s;}
+.problem-icon-2 {animation: iconPulse 4.5s infinite 1.5s;}
+.problem-icon-3 {animation: iconPulse 4.5s infinite 3s;}
+@keyframes iconPulse {
+  0%, 33%, 100% {transform: scale(1);}
+  11%, 22% {transform: scale(1.2);}
+}
 .highlight-text{display:inline-block;color:#f72585;font-weight:700;padding:2px 8px;border-radius:4px;background:linear-gradient(135deg,rgba(247,37,133,.1),rgba(247,37,133,.2));transform-origin:left center}
 .highlight-active{animation:highlight-pulse 1.5s ease-in-out}
 .info-card{background-color:#16213e;padding:15px;border-radius:8px;margin-bottom:15px;border:1px solid #4895ef}
@@ -105,7 +146,7 @@ body{background:#121212;color:var(--text);line-height:1.6;overflow:hidden;margin
 #slide-9 .slide-conclusion-wrapper{width:80%;max-width:800px}
 #slide-9 .slide-header{padding:30px;font-size:3rem;line-height:1.4;white-space:normal;overflow-wrap:break-word;background:linear-gradient(135deg,rgba(255,215,0,.1),rgba(255,215,0,.3));border-radius:15px;border:2px solid rgba(255,215,0,.5);min-height:150px}
 .citation{font-size:0.8rem;color:#b8b8b8;font-style:italic;text-align:right;margin-top:5px}
-.source-section{background-color:rgba(0,0,0,0.3);padding:10px;border-radius:8px;margin-top:5px}
+.source-section{background-color:rgba(0,0,0,0.3);padding:10px;border-radius:8px;margin-top:5px;max-height:150px;overflow-y:auto;}
 .source-title{color:var(--accent);margin-bottom:5px;font-weight:bold;font-size:1rem}
 .source-list{list-style-type:none;padding-left:5px}
 .source-list li{margin-bottom:5px;font-size:0.85rem}
@@ -120,6 +161,45 @@ body{background:#121212;color:var(--text);line-height:1.6;overflow:hidden;margin
 .reference-list li:before{content:"•";position:absolute;left:0;color:var(--accent);font-weight:bold}
 .reference-link{color:#4cc9f0;text-decoration:none;word-break:break-all}
 .reference-link:hover{text-decoration:underline}
+/* แก้ไขสำหรับหน้า 4, 5, 6 - ขยายขนาดของไอคอนในส่วนหัว */
+.header-with-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+.header-icon {
+  width: 120px; /* เพิ่มขนาดจาก 80px เป็น 120px */
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.problem-title {
+  color: #ff6b6b; /* เปลี่ยนสีหัวข้อปัญหาให้เป็นสีแดงอ่อน */
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+}
+
+/* ปรับสีของไอคอนในหน้า 3 */
+.problem-icon-1 img {
+    filter: hue-rotate(0deg) brightness(1.2); /* สื่อถึงการพูดเร็ว - สีแดงส้ม */
+}
+
+.problem-icon-2 img {
+    filter: hue-rotate(200deg) brightness(1.2); /* สื่อถึงการสนทนาที่ไม่สมบูรณ์ - สีฟ้า */
+}
+
+.problem-icon-3 img {
+    filter: hue-rotate(100deg) brightness(1.2); /* สื่อถึงการพูดที่ทำให้คนอื่นฟังไม่เข้าใจ - สีเขียว */
+}
+
 @media screen and (max-width:1024px){
 body{font-size:14px}
 #slide-1 .slide-header{font-size:4rem;padding:15px 30px}
@@ -130,7 +210,7 @@ body{font-size:14px}
 .impact-item p{font-size:1.1rem}
 .bottom-message p{font-size:1.2rem}
 .slide-header{font-size:2.2rem}
-.problem-icon-container{width:150px;height:150px;font-size:3rem}
+.problem-icon-container{width:150px;height:150px;font-size:3rem} /* ปรับขนาดให้เหมาะสมกับหน้าจอขนาดเล็ก */
 #slide-9 .slide-header{font-size:2.5rem;padding:20px}
 }
 @media screen and (max-width:768px){
@@ -152,7 +232,7 @@ body{font-size:12px}
 .bottom-message p{font-size:1rem}
 .slide-header{font-size:1.8rem;margin-bottom:15px}
 .slide-content{max-height:80vh;padding-bottom:70px}
-.problem-icon-container{width:100px;height:100px;font-size:2.5rem}
+.problem-icon-container{width:120px;height:120px;font-size:2.5rem} /* ปรับขนาดให้เหมาะสมกับหน้าจอมือถือ */
 .nav-btn{width:60px;height:60px;font-size:30px}
 .slide-indicator{bottom:15px;right:15px;font-size:1.2rem}
 #slide-9 .slide-conclusion-wrapper{width:90%!important}
@@ -184,10 +264,11 @@ body{font-size:12px}
 <div class="subtitle">
 คนส่วนใหญ่สื่อสารด้วยการ <span class="highlight">'พูดใส่'</span> ซึ่งขาดการรับฟังและเข้าใจ
 </div>
+<div class="slide-content-static">
 <div class="boxes-container">
 <div class="box red-box">
-<div class="box-header">
-<div class="box-icon"><i class="fas fa-bullhorn"></i></div>
+<div class="box-header" style="justify-content: flex-start;">
+<div class="box-icon"><img src="https://imgur.com/rCuCfcm.png" alt="พูดใส่"></div>
 <h3 class="box-title">พูดใส่</h3>
 </div>
 <div class="divider"></div>
@@ -205,8 +286,8 @@ body{font-size:12px}
 </div>
 </div>
 <div class="box green-box">
-<div class="box-header">
-<div class="box-icon"><i class="fas fa-comments"></i></div>
+<div class="box-header" style="justify-content: flex-start;">
+<div class="box-icon"><img src="https://imgur.com/pMaq4kK.png" alt="พูดด้วย"></div>
 <h3 class="box-title">พูดด้วย</h3>
 </div>
 <div class="divider"></div>
@@ -232,6 +313,7 @@ body{font-size:12px}
 * อ้างอิงจาก: Salesforce Research (2020) - "Impact of Communication on Business Success"
 </div>
 </div>
+</div>
 
 <!-- Slide 3 -->
 <div class="slide-container" id="slide-3">
@@ -239,50 +321,56 @@ body{font-size:12px}
 <div class="slide-content">
 <div style="display:flex;flex-wrap:wrap;width:100%;justify-content:space-between">
 <div class="feature-box" style="width:32%">
-<div class="problem-icon-container" style="animation:pulse 2s infinite"><i class="fas fa-running" style="font-size:3.5rem"></i></div>
-<h4 style="margin-bottom:10px;font-size:1.3rem">ปัญหา 1: พูดเร็วจนผู้ฟังตามไม่ทัน</h4>
+<div class="problem-icon-container problem-icon-1">
+    <img src="https://imgur.com/q5NLkcx.png" alt="พูดเร็วจนผู้ฟังตามไม่ทัน">
+</div>
+<h4 class="problem-title">ปัญหา 1: พูดเร็วจนผู้ฟังตามไม่ทัน</h4>
 <div style="background-color:#164a41;padding:8px;border-radius:5px;margin-top:10px;display:flex;align-items:center">
-<span style="color:#4cc9f0;margin-right:10px;font-weight:bold">✓</span>
-<p>1.พูดช้าลง</p>
+<span style="color:#4cc9f0;margin-right:10px;font-weight:bold;display:inline-block;">✓</span>
+<p style="margin:0;display:inline-block;">1.พูดช้าลง</p>
 </div>
 <div style="background-color:#164a41;padding:8px;border-radius:5px;margin-top:10px;display:flex;align-items:center">
-<span style="color:#4cc9f0;margin-right:10px;font-weight:bold">✓</span>
-<p>2.เน้นข้อมูลสำคัญ</p>
+<span style="color:#4cc9f0;margin-right:10px;font-weight:bold;display:inline-block;">✓</span>
+<p style="margin:0;display:inline-block;">2.เน้นข้อมูลสำคัญ</p>
 </div>
 <div style="background-color:#164a41;padding:8px;border-radius:5px;margin-top:10px;display:flex;align-items:center">
-<span style="color:#4cc9f0;margin-right:10px;font-weight:bold">✓</span>
-<p>3.ใช้ภาพประกอบ</p>
+<span style="color:#4cc9f0;margin-right:10px;font-weight:bold;display:inline-block;">✓</span>
+<p style="margin:0;display:inline-block;">3.ใช้ภาพประกอบ</p>
 </div>
 </div>
 <div class="feature-box" style="width:32%">
-<div class="problem-icon-container" style="animation:pulse 2s infinite 0.5s"><i class="fas fa-assistive-listening-systems" style="font-size:3.5rem"></i></div>
-<h4 style="margin-bottom:10px;font-size:1.3rem">ปัญหา 2: ฟังเพื่อตอบ ไม่ใช่ฟังเพื่อเข้าใจ</h4>
+<div class="problem-icon-container problem-icon-2">
+    <img src="https://imgur.com/1qWvkFv.png" alt="ฟังเพื่อตอบ ไม่ใช่ฟังเพื่อเข้าใจ">
+</div>
+<h4 class="problem-title">ปัญหา 2: ฟังเพื่อตอบ ไม่ใช่ฟังเพื่อเข้าใจ</h4>
 <div class="quote-box">
 "การฟังเพื่อโต้ตอบทันที มักทำให้เกิดความขัดแย้ง และไม่เข้าใจปัญหาจริง"
 </div>
 <div style="background-color:#164a41;padding:8px;border-radius:5px;margin-top:10px;display:flex;align-items:center">
-<span style="color:#4cc9f0;margin-right:10px;font-weight:bold">✓</span>
-<p>1.ตั้งใจฟัง เพื่อเข้าใจ</p>
+<span style="color:#4cc9f0;margin-right:10px;font-weight:bold;display:inline-block;">✓</span>
+<p style="margin:0;display:inline-block;">1.ตั้งใจฟัง เพื่อเข้าใจ</p>
 </div>
 <div style="background-color:#164a41;padding:8px;border-radius:5px;margin-top:10px;display:flex;align-items:center">
-<span style="color:#4cc9f0;margin-right:10px;font-weight:bold">✓</span>
-<p>2.ถามเพื่อให้เข้าใจปัญหา</p>
+<span style="color:#4cc9f0;margin-right:10px;font-weight:bold;display:inline-block;">✓</span>
+<p style="margin:0;display:inline-block;">2.ถามเพื่อให้เข้าใจปัญหา</p>
 </div>
 </div>
 <div class="feature-box" style="width:32%">
-<div class="problem-icon-container" style="animation:pulse 2s infinite 1s"><i class="fas fa-calculator" style="font-size:3.5rem"></i></div>
-<h4 style="margin-bottom:10px;font-size:1.3rem">ปัญหา 3: ใช้ศัพท์เทคนิคเกินจำเป็น</h4>
+<div class="problem-icon-container problem-icon-3">
+    <img src="https://imgur.com/11XHlgh.png" alt="ใช้ศัพท์เทคนิคเกินจำเป็น">
+</div>
+<h4 class="problem-title">ปัญหา 3: ใช้ศัพท์เทคนิคเกินจำเป็น</h4>
 <div style="background-color:#164a41;padding:8px;border-radius:5px;margin-top:10px;display:flex;align-items:center">
-<span style="color:#4cc9f0;margin-right:10px;font-weight:bold">✓</span>
-<p>1.เลี่ยงศัพท์เทคนิคที่ไม่จำเป็น</p>
+<span style="color:#4cc9f0;margin-right:10px;font-weight:bold;display:inline-block;">✓</span>
+<p style="margin:0;display:inline-block;">1.เลี่ยงศัพท์เทคนิคที่ไม่จำเป็น</p>
 </div>
 <div style="background-color:#164a41;padding:8px;border-radius:5px;margin-top:10px;display:flex;align-items:center">
-<span style="color:#4cc9f0;margin-right:10px;font-weight:bold">✓</span>
-<p>2.อธิบายพร้อมตัวอย่างที่เข้าใจง่าย</p>
+<span style="color:#4cc9f0;margin-right:10px;font-weight:bold;display:inline-block;">✓</span>
+<p style="margin:0;display:inline-block;">2.อธิบายพร้อมตัวอย่างที่เข้าใจง่าย</p>
 </div>
 <div style="background-color:#164a41;padding:8px;border-radius:5px;margin-top:10px;display:flex;align-items:center">
-<span style="color:#4cc9f0;margin-right:10px;font-weight:bold">✓</span>
-<p>3.เปรียบเทียบกับสิ่งที่ผู้ฟังคุ้นเคย</p>
+<span style="color:#4cc9f0;margin-right:10px;font-weight:bold;display:inline-block;">✓</span>
+<p style="margin:0;display:inline-block;">3.เปรียบเทียบกับสิ่งที่ผู้ฟังคุ้นเคย</p>
 </div>
 </div>
 </div>
@@ -443,7 +531,7 @@ body{font-size:12px}
 <!-- Slide 5 -->
 <div class="slide-container" id="slide-5">
 <h1 class="slide-header" style="font-size:2.4rem;margin-bottom:5px">กฎ 5 วินาที: เทคนิคเพิ่มพลังการสื่อสาร</h1>
-<div style="text-align:center;margin-bottom:5px">
+<div style="text-align:center;margin-bottom:15px;margin-top:0;">
 <div style="display:flex;justify-content:center;align-items:center;gap:10px">
 <div id="count-1" style="width:35px;height:35px;border-radius:50%;background-color:#f9c80e;color:#1a1a2e;font-size:1.5rem;font-weight:bold;display:flex;align-items:center;justify-content:center">1</div>
 <div id="count-2" style="width:35px;height:35px;border-radius:50%;background-color:#f9c80e;color:#1a1a2e;font-size:1.5rem;font-weight:bold;display:flex;align-items:center;justify-content:center">2</div>
@@ -530,7 +618,7 @@ body{font-size:12px}
 </div>
 </div>
 </div>
-<div class="source-section">
+<div class="source-section" style="max-height:120px; overflow-y:auto;">
 <div class="source-title"><i class="fas fa-link"></i> แหล่งข้อมูล</div>
 <ul class="source-list">
 <li><a href="https://www.melrobbins.com/5-second-rule" target="_blank">Mel Robbins - The 5 Second Rule (2017)</a></li>
@@ -613,7 +701,7 @@ body{font-size:12px}
 <p style="font-size:0.95rem;margin:0">"คำถามที่ดีมีพลังกว่าคำตอบ<br>เพราะกระตุ้นให้เกิดการคิดและพัฒนา"</p>
 <p style="text-align:right;font-size:0.75rem;margin-top:5px">- Peter Drucker</p>
 </div>
-<div class="source-section" style="padding:8px;margin-top:0">
+<div class="source-section" style="padding:8px;margin-top:0;max-height:120px;overflow-y:auto;">
 <div class="source-title" style="font-size:0.9rem"><i class="fas fa-link"></i> แหล่งข้อมูล</div>
 <ul class="source-list" style="margin-top:3px">
 <li style="font-size:0.8rem"><a href="https://hbr.org/2019/05/the-surprising-power-of-questions" target="_blank">HBR - The Power of Questions (2019)</a></li>
@@ -675,7 +763,7 @@ body{font-size:12px}
 </ul>
 </div>
 </div>
-<div class="source-section">
+<div class="source-section" style="max-height:120px; overflow-y:auto;">
 <div class="source-title"><i class="fas fa-link"></i> แหล่งข้อมูล</div>
 <ul class="source-list">
 <li><a href="https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/better-meetings-worth-millions" target="_blank">McKinsey - Better Meetings Worth Millions (2022)</a></li>
@@ -738,7 +826,7 @@ body{font-size:12px}
 </div>
 </div>
 </div>
-<div class="source-section">
+<div class="source-section" style="max-height:120px; overflow-y:auto;">
 <div class="source-title"><i class="fas fa-link"></i> แหล่งข้อมูล</div>
 <ul class="source-list">
 <li><a href="https://hbr.org/2016/11/how-to-make-your-one-on-ones-with-employees-more-productive" target="_blank">HBR - Productive One-on-Ones (2016)</a></li>
@@ -825,7 +913,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // แสดงจำนวนสไลด์ทั้งหมด
     totalSlidesElement.textContent = slides.length;
-    currentSlideElement.textContent = currentIndex + 1;
+currentSlideElement.textContent = currentIndex + 1;
     
     // ฟังก์ชันสำหรับเปลี่ยนสไลด์
     function showSlide(index) {
@@ -942,7 +1030,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentTime = new Date().getTime();
         const timeDiff = currentTime - lastClickTime;
         
-        if (timeDiff > 0 && timeDiff < 500) {
+        if (timeDiff > 0 && timeDiff < 300) {
             // ดับเบิลคลิกตรวจพบ
             toggleFullScreen();
         }
@@ -961,212 +1049,194 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
-});
-</script>
-<script>
-// ฟังก์ชันสำหรับการกะพริบตัวเลข และเปลี่ยนเนื้อหาด้านขวา
-document.addEventListener('DOMContentLoaded', function() {
-    // หาอีลิเมนต์ที่ต้องการที่จะทำการเปลี่ยนแปลง
-    const countElements = [
-        document.getElementById('count-1'),
-        document.getElementById('count-2'),
-        document.getElementById('count-3'),
-        document.getElementById('count-4'),
-        document.getElementById('count-5')
-    ];
     
-    // ส่วนของวิธีการปฏิบัติ (ขั้นตอนทั้ง 3)
-    const methodSteps = [
-        document.getElementById('listen-circle'),  // ขั้นตอนที่ 1
-        document.getElementById('pause-circle'),   // ขั้นตอนที่ 2
-        document.getElementById('respond-circle')  // ขั้นตอนที่ 3
-    ];
-    
-    // กำหนดสีให้กับแต่ละขั้นตอนและตัวเลข
-    const colors = {
-        listen: {
-            bg: '#4cc9f0',          // พื้นหลัง - ฟ้า (สำหรับการรับฟัง)
-            glow: 'rgba(76, 201, 240, 0.8)',  // เงา
-            text: '#1a1a2e'         // สีข้อความ
-        },
-        pause: {
-            bg: '#f9c80e',          // พื้นหลัง - เหลือง (สำหรับการหยุด คิด)
-            glow: 'rgba(249, 200, 14, 0.8)',  // เงา
-            text: '#1a1a2e'         // สีข้อความ
-        },
-        preparingRespond: {
-            bg: '#ffb347',          // พื้นหลัง - ส้มอ่อน (กำลังจะถึงเวลาตอบ)
-            glow: 'rgba(255, 179, 71, 0.8)',  // เงา
-            text: '#1a1a2e'         // สีข้อความ
-        },
-        respond: {
-            bg: '#ff7b25',          // พื้นหลัง - ส้มเข้ม (ถึงเวลาตอบ)
-            glow: 'rgba(255, 123, 37, 0.9)',  // เงา
-            text: '#1a1a2e'         // สีข้อความ
+    // ฟังก์ชันสำหรับการกะพริบตัวเลข และเปลี่ยนเนื้อหาด้านขวา
+    function setupCountAnimation() {
+        // หาอีลิเมนต์ที่ต้องการที่จะทำการเปลี่ยนแปลง
+        const countElements = [
+            document.getElementById('count-1'),
+            document.getElementById('count-2'),
+            document.getElementById('count-3'),
+            document.getElementById('count-4'),
+            document.getElementById('count-5')
+        ];
+        
+        // ส่วนของวิธีการปฏิบัติ (ขั้นตอนทั้ง 3)
+        const methodSteps = [
+            document.getElementById('listen-circle'),  // ขั้นตอนที่ 1
+            document.getElementById('pause-circle'),   // ขั้นตอนที่ 2
+            document.getElementById('respond-circle')  // ขั้นตอนที่ 3
+        ];
+        
+        // กำหนดสีให้กับแต่ละขั้นตอนและตัวเลข
+        const colors = {
+            listen: {
+                bg: '#4cc9f0',          // พื้นหลัง - ฟ้า (สำหรับการรับฟัง)
+                glow: 'rgba(76, 201, 240, 0.8)',  // เงา
+                text: '#1a1a2e'         // สีข้อความ
+            },
+            pause: {
+                bg: '#f9c80e',          // พื้นหลัง - เหลือง (สำหรับการหยุด คิด)
+                glow: 'rgba(249, 200, 14, 0.8)',  // เงา
+                text: '#1a1a2e'         // สีข้อความ
+            },
+            preparingRespond: {
+                bg: '#ffb347',          // พื้นหลัง - ส้มอ่อน (กำลังจะถึงเวลาตอบ)
+                glow: 'rgba(255, 179, 71, 0.8)',  // เงา
+                text: '#1a1a2e'         // สีข้อความ
+            },
+            respond: {
+                bg: '#ff7b25',          // พื้นหลัง - ส้มเข้ม (ถึงเวลาตอบ)
+                glow: 'rgba(255, 123, 37, 0.9)',  // เงา
+                text: '#1a1a2e'         // สีข้อความ
+            }
+        };
+        
+        // ตัวแปรเก็บสถานะของขั้นตอนที่กำลังแสดงอยู่
+        let currentStepShowing = 0;
+        
+        // ฟังก์ชันรีเซ็ตเฉพาะตัวเลขด้านบน
+        function resetCountElements() {
+            // รีเซ็ตตัวเลข 1-5 ด้านบน
+            countElements.forEach(el => {
+                if (el) {
+                    el.style.opacity = '0.5';
+                    el.style.transform = 'scale(1)';
+                    el.style.boxShadow = 'none';
+                    
+                    // คืนสีเดิม
+                    el.style.backgroundColor = '#f9c80e';
+                    el.style.color = '#1a1a2e';
+                }
+            });
         }
-    };
-    
-    // ตัวแปรเก็บสถานะของขั้นตอนที่กำลังแสดงอยู่
-    let currentStepShowing = 0;
-    
-    // ฟังก์ชันรีเซ็ตเฉพาะตัวเลขด้านบน
-    function resetCountElements() {
-        // รีเซ็ตตัวเลข 1-5 ด้านบน
-        countElements.forEach(el => {
-            if (el) {
-                el.style.opacity = '0.5';
-                el.style.transform = 'scale(1)';
-                el.style.boxShadow = 'none';
+        
+        // ฟังก์ชันรีเซ็ตทั้งหมด (ทั้งตัวเลขด้านบนและขั้นตอนด้านล่าง)
+        function resetAllElements() {
+            resetCountElements();
+            
+            // รีเซ็ตวงกลมวิธีการปฏิบัติ
+            methodSteps.forEach(step => {
+                if (step) {
+                    step.style.transform = 'scale(1)';
+                    step.style.boxShadow = 'none';
+                }
+            });
+            
+            // คืนสีเดิมให้กับขั้นตอน
+            if (methodSteps[0]) methodSteps[0].style.backgroundColor = colors.listen.bg;
+            if (methodSteps[1]) methodSteps[1].style.backgroundColor = colors.pause.bg;
+            if (methodSteps[2]) methodSteps[2].style.backgroundColor = colors.respond.bg;
+        }
+        
+        // ฟังก์ชันไฮไลท์ขั้นตอน
+        function highlightStep(stepIndex, colorType) {
+            // รีเซ็ตขั้นตอนทั้งหมดก่อน
+            methodSteps.forEach(step => {
+                if (step) {
+                    step.style.transform = 'scale(1)';
+                    step.style.boxShadow = 'none';
+                }
+            });
+            
+            // ไฮไลท์ขั้นตอนที่ต้องการ
+            if (methodSteps[stepIndex]) {
+                methodSteps[stepIndex].style.transform = 'scale(1.3)';
+                methodSteps[stepIndex].style.boxShadow = `0 0 10px ${colors[colorType].glow}`;
+                methodSteps[stepIndex].style.backgroundColor = colors[colorType].bg;
+            }
+            
+            // บันทึกขั้นตอนปัจจุบัน
+            currentStepShowing = stepIndex;
+        }
+        
+        // ฟังก์ชันไฮไลท์ตัวเลขด้านบนและขั้นตอนที่เกี่ยวข้อง
+        function highlightNumber(index) {
+            // รีเซ็ตเฉพาะตัวเลขด้านบน
+            resetCountElements();
+            
+            // ไฮไลท์ตัวเลขปัจจุบันด้านบน และเปลี่ยนสี
+            if (countElements[index]) {
+                countElements[index].style.opacity = '1';
+                countElements[index].style.transform = 'scale(1.2)';
                 
-                // คืนสีเดิม
-                el.style.backgroundColor = '#f9c80e';
-                el.style.color = '#1a1a2e';
+                // กำหนดสีตามช่วงของตัวเลข
+                let colorType;
+                if (index === 0) {
+                    // เลข 1 - สีฟ้า (การรับฟัง)
+                    colorType = 'listen';
+                } else if (index === 1) {
+                    // เลข 2 - สีเหลือง (การหยุด)
+                    colorType = 'pause';
+                } else if (index === 2 || index === 3) {
+                    // เลข 3, 4 - สีส้มอ่อน (กำลังจะถึงเวลาตอบ)
+                    colorType = 'preparingRespond';
+                } else {
+                    // เลข 5 - สีส้มเข้ม (ถึงเวลาตอบ)
+                    colorType = 'respond';
+                }
+                
+                countElements[index].style.backgroundColor = colors[colorType].bg;
+                countElements[index].style.color = colors[colorType].text;
+                countElements[index].style.boxShadow = `0 0 10px ${colors[colorType].glow}`;
             }
-        });
-    }
-    
-    // ฟังก์ชันรีเซ็ตทั้งหมด (ทั้งตัวเลขด้านบนและขั้นตอนด้านล่าง)
-    function resetAllElements() {
-        resetCountElements();
-        
-        // รีเซ็ตวงกลมวิธีการปฏิบัติ
-        methodSteps.forEach(step => {
-            if (step) {
-                step.style.transform = 'scale(1)';
-                step.style.boxShadow = 'none';
-            }
-        });
-        
-        // คืนสีเดิมให้กับขั้นตอน
-        if (methodSteps[0]) methodSteps[0].style.backgroundColor = colors.listen.bg;
-        if (methodSteps[1]) methodSteps[1].style.backgroundColor = colors.pause.bg;
-        if (methodSteps[2]) methodSteps[2].style.backgroundColor = colors.respond.bg;
-    }
-    
-    // ฟังก์ชันไฮไลท์ขั้นตอน
-    function highlightStep(stepIndex, colorType) {
-        // รีเซ็ตขั้นตอนทั้งหมดก่อน
-        methodSteps.forEach(step => {
-            if (step) {
-                step.style.transform = 'scale(1)';
-                step.style.boxShadow = 'none';
-            }
-        });
-        
-        // ไฮไลท์ขั้นตอนที่ต้องการ
-        if (methodSteps[stepIndex]) {
-            methodSteps[stepIndex].style.transform = 'scale(1.3)';
-            methodSteps[stepIndex].style.boxShadow = `0 0 10px ${colors[colorType].glow}`;
-            methodSteps[stepIndex].style.backgroundColor = colors[colorType].bg;
-        }
-        
-        // บันทึกขั้นตอนปัจจุบัน
-        currentStepShowing = stepIndex;
-    }
-    
-    // ฟังก์ชันไฮไลท์ตัวเลขด้านบนและขั้นตอนที่เกี่ยวข้อง
-    function highlightNumber(index) {
-        // รีเซ็ตเฉพาะตัวเลขด้านบน
-        resetCountElements();
-        
-        // ไฮไลท์ตัวเลขปัจจุบันด้านบน และเปลี่ยนสี
-        if (countElements[index]) {
-            countElements[index].style.opacity = '1';
-            countElements[index].style.transform = 'scale(1.2)';
             
-            // กำหนดสีตามช่วงของตัวเลข
-            let colorType;
+            // จัดการกับขั้นตอนด้านล่างตามความต้องการที่ระบุ
             if (index === 0) {
-                // เลข 1 - สีฟ้า (การรับฟัง)
-                colorType = 'listen';
+                // เมื่อด้านบนกระพริบที่เลข 1 → ด้านล่างกระพริบที่ขั้นตอนที่ 1 (Listen) สีฟ้า
+                highlightStep(0, 'listen');
             } else if (index === 1) {
-                // เลข 2 - สีเหลือง (การหยุด)
-                colorType = 'pause';
-            } else if (index === 2 || index === 3) {
-                // เลข 3, 4 - สีส้มอ่อน (กำลังจะถึงเวลาตอบ)
-                colorType = 'preparingRespond';
-            } else {
-                // เลข 5 - สีส้มเข้ม (ถึงเวลาตอบ)
-                colorType = 'respond';
+                // เมื่อด้านบนกระพริบที่เลข 2 → ด้านล่างกระพริบที่ขั้นตอนที่ 2 (Pause) สีเหลือง
+                highlightStep(1, 'pause');
+            } else if (index === 4) {
+                // เมื่อด้านบนกระพริบที่เลข 5 → ด้านล่างกระพริบที่ขั้นตอนที่ 3 (Respond) สีส้ม
+                highlightStep(2, 'respond');
+            }
+            // สำหรับเลข 3 และ 4 ไม่ต้องทำอะไร เพราะต้องการให้ค้างที่ขั้นตอนที่ 2
+        }
+        
+        // ฟังก์ชันสำหรับเริ่มการกะพริบ
+        function startAnimation() {
+            // ตรวจสอบว่าอยู่ที่สไลด์ที่ 5 หรือไม่
+            const slide5 = document.getElementById('slide-5');
+            if (!slide5 || !slide5.classList.contains('active')) {
+                // ถ้าไม่ได้อยู่ที่สไลด์ 5 ให้ตรวจสอบอีกครั้งหลังจาก 1 วินาที
+                setTimeout(startAnimation, 1000);
+                return;
             }
             
-            countElements[index].style.backgroundColor = colors[colorType].bg;
-            countElements[index].style.color = colors[colorType].text;
-            countElements[index].style.boxShadow = `0 0 10px ${colors[colorType].glow}`;
-        }
-        
-        // จัดการกับขั้นตอนด้านล่างตามความต้องการที่ระบุ
-        if (index === 0) {
-            // เมื่อด้านบนกระพริบที่เลข 1 → ด้านล่างกระพริบที่ขั้นตอนที่ 1 (Listen) สีฟ้า
-            highlightStep(0, 'listen');
-        } else if (index === 1) {
-            // เมื่อด้านบนกระพริบที่เลข 2 → ด้านล่างกระพริบที่ขั้นตอนที่ 2 (Pause) สีเหลือง
-            highlightStep(1, 'pause');
-        } else if (index === 4) {
-            // เมื่อด้านบนกระพริบที่เลข 5 → ด้านล่างกระพริบที่ขั้นตอนที่ 3 (Respond) สีส้ม
-            highlightStep(2, 'respond');
-        }
-        // สำหรับเลข 3 และ 4 ไม่ต้องทำอะไร เพราะต้องการให้ค้างที่ขั้นตอนที่ 2
-    }
-    
-    // ฟังก์ชันสำหรับเริ่มการกะพริบ
-    function startAnimation() {
-        // ตรวจสอบว่าอยู่ที่สไลด์ที่ 5 หรือไม่
-        const slide5 = document.getElementById('slide-5');
-        if (!slide5 || !slide5.classList.contains('active')) {
-            // ถ้าไม่ได้อยู่ที่สไลด์ 5 ให้ตรวจสอบอีกครั้งหลังจาก 1 วินาที
-            setTimeout(startAnimation, 1000);
-            return;
-        }
-        
-        // รีเซ็ตทุกอย่างเมื่อเริ่มต้นแอนิเมชันใหม่
-        resetAllElements();
-        
-        // เริ่มต้นเปลี่ยนสีพื้นหลังของขั้นตอนตามประเภท
-        if (methodSteps[0]) methodSteps[0].style.backgroundColor = colors.listen.bg;
-        if (methodSteps[1]) methodSteps[1].style.backgroundColor = colors.pause.bg;
-        if (methodSteps[2]) methodSteps[2].style.backgroundColor = colors.respond.bg;
-        
-        let currentIndex = 0;
-        
-        // ฟังก์ชันสำหรับไฮไลท์และเปลี่ยนไปยังตัวเลขถัดไป
-        function animateNext() {
-            // ไฮไลท์ตัวเลขปัจจุบัน
-            highlightNumber(currentIndex);
+            // รีเซ็ตทุกอย่างเมื่อเริ่มต้นแอนิเมชันใหม่
+            resetAllElements();
             
-            // เพิ่มดัชนีและวนกลับเมื่อถึงตัวสุดท้าย
-            currentIndex = (currentIndex + 1) % countElements.length;
+            // เริ่มต้นเปลี่ยนสีพื้นหลังของขั้นตอนตามประเภท
+            if (methodSteps[0]) methodSteps[0].style.backgroundColor = colors.listen.bg;
+            if (methodSteps[1]) methodSteps[1].style.backgroundColor = colors.pause.bg;
+            if (methodSteps[2]) methodSteps[2].style.backgroundColor = colors.respond.bg;
             
-            // เรียกฟังก์ชันนี้อีกครั้งหลังจาก 1 วินาที
-            setTimeout(animateNext, 1000);
+            let currentIndex = 0;
+            
+            // ฟังก์ชันสำหรับไฮไลท์และเปลี่ยนไปยังตัวเลขถัดไป
+            function animateNext() {
+                // ไฮไลท์ตัวเลขปัจจุบัน
+                highlightNumber(currentIndex);
+                
+                // เพิ่มดัชนีและวนกลับเมื่อถึงตัวสุดท้าย
+                currentIndex = (currentIndex + 1) % countElements.length;
+                
+                // เรียกฟังก์ชันนี้อีกครั้งหลังจาก 1 วินาที
+                setTimeout(animateNext, 1000);
+            }
+            
+            // เริ่มแอนิเมชัน
+            animateNext();
         }
         
-        // เริ่มแอนิเมชัน
-        animateNext();
+        // เริ่มการกะพริบเมื่อเปิดหน้าเว็บ
+        startAnimation();
     }
-    
-    // เริ่มการกะพริบเมื่อเปิดหน้าเว็บ
-    startAnimation();
-    
-    // เพิ่มการตรวจสอบการเปลี่ยนสไลด์
-    const prevBtn = document.querySelector('.prev-btn');
-    const nextBtn = document.querySelector('.next-btn');
-    
-    // รีสตาร์ทแอนิเมชันเมื่อกดปุ่มเปลี่ยนสไลด์
-    if (prevBtn) prevBtn.addEventListener('click', function() {
-        setTimeout(startAnimation, 300);
-    });
-    
-    if (nextBtn) nextBtn.addEventListener('click', function() {
-        setTimeout(startAnimation, 300);
-    });
-    
-    // รีสตาร์ทแอนิเมชันเมื่อใช้คีย์บอร์ดเปลี่ยนสไลด์
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-            setTimeout(startAnimation, 300);
-        }
-    });
+
+    // รัน animation สำหรับหน้า 5
+    setupCountAnimation();
 });
 </script>
 </body>
